@@ -1,25 +1,41 @@
-import sys
-
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLayout, QHBoxLayout, QLabel,\
                             QLineEdit, QFrame, QSizePolicy, QSpacerItem, QPushButton, \
-                            QApplication, QGridLayout, QMainWindow
+                            QGridLayout, QMainWindow, QApplication
 from PyQt5.QtCore import Qt, QSize, QCoreApplication
-
-from icons import icon
 
 
 # class GeometryWindow(QMainWindow):
 class GeometryWindow(QWidget):
-    def __init__(self):
+    """
+    Класс для создания комплексного окна геометрии, которое открывается по нажатию кнопки "Геометрия"
+    """
+    def __init__(self, tree, graphics):
         self._translate = QCoreApplication.translate
         super(GeometryWindow, self).__init__()
         self.widget_geometry = QWidget()
         # self.setCentralWidget(self.widget_geometry)
-        self.gridlayout = QGridLayout(self.widget_geometry)
+        self.gridLayout = QGridLayout(self.widget_geometry)
         self.get_tab_widget()
-        self.gridlayout.addWidget(self.tabWidget)
+        self.tree = tree
+        self.graphics = graphics
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.horizontalLayout.setContentsMargins(0, -1, -1, -1)
+        self.horizontalLayout.setSpacing(50)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        self.horizontalLayout.addWidget(self.tabWidget)
+        self.horizontalLayout.addWidget(self.tree.treeWidget)
+
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.graphics.graph_view, 0, 0, 1, 1)
 
     def get_tab_widget(self):
+        """
+        Создание окна с вкладками для построения геометрии
+        :return:
+        """
         self.tabWidget = QTabWidget(self.widget_geometry)
         self.tabWidget.setStyleSheet("backhround-color:rgb(156, 156, 156)")
         self.tabWidget.setTabPosition(QTabWidget.North)
@@ -32,6 +48,10 @@ class GeometryWindow(QWidget):
                                   self._translate("GeometryWindow", "Построение линии по двум точкам"))
 
     def get_two_points(self):
+        """
+        Создание первой вкладки для построения геометрии по координатам двух точек
+        :return:
+        """
         self.two_points = QWidget()
         self.two_points.setObjectName("two_points")
         # self.gridLayout_3 = QGridLayout(self.two_points)
@@ -72,6 +92,7 @@ class GeometryWindow(QWidget):
         self.lineEdit_x1.setCursorMoveStyle(Qt.LogicalMoveStyle)
         self.lineEdit_x1.setClearButtonEnabled(False)
         self.lineEdit_x1.setObjectName("lineEdit_x1")
+        self.lineEdit_x1.setText('0.0')
 
         self.x1_line.addWidget(self.lineEdit_x1)
         self.point_1.addLayout(self.x1_line)
@@ -88,6 +109,7 @@ class GeometryWindow(QWidget):
         self.lineEdit_y1 = QLineEdit(self.two_points)
         self.lineEdit_y1.setMinimumSize(QSize(0, 25))
         self.lineEdit_y1.setObjectName("lineEdit_y1")
+        self.lineEdit_y1.setText('0.0')
 
         self.y1_line.addWidget(self.lineEdit_y1)
 
@@ -132,6 +154,7 @@ class GeometryWindow(QWidget):
         self.lineEdit_x2.setMinimumSize(QSize(0, 25))
         self.lineEdit_x2.setObjectName("lineEdit_x2")
 
+
         self.x2_line.addWidget(self.lineEdit_x2)
         self.point_2.addLayout(self.x2_line)
 
@@ -173,12 +196,19 @@ class GeometryWindow(QWidget):
         self.button_line_2_p.setSizePolicy(sizePolicy)
         self.button_line_2_p.setObjectName("button_line_2_p")
         self.button_line_2_p.setText(self._translate("GeometryWindow", "Построить линию"))
+        self.button_line_2_p.clicked.connect(self.add_line)
 
         self.layout_build_line.addWidget(self.button_line_2_p)
         self.layout_build_line.setStretch(0, 3)
         self.layout_build_line.setStretch(1, 1)
 
         self.two_points_layout.addLayout(self.layout_build_line)
+
+        self.label_output = QLabel(self.two_points)
+        self.label_output.setText("")
+        self.label_output.setObjectName("label_output")
+        self.two_points_layout.addWidget(self.label_output)
+
         spacerItem1 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.two_points_layout.addItem(spacerItem1)
 
@@ -204,11 +234,45 @@ class GeometryWindow(QWidget):
         self.layout_finally_geometry.setStretch(2, 1)
 
         self.two_points_layout.addLayout(self.layout_finally_geometry)
+
         self.two_points_layout.setStretch(0, 6)
         self.two_points_layout.setStretch(1, 2)
-        self.two_points_layout.setStretch(2, 12)
-        self.two_points_layout.setStretch(3, 3)
+        self.two_points_layout.setStretch(2, 2)
+        self.two_points_layout.setStretch(3, 10)
+        self.two_points_layout.setStretch(4, 3)
 
+    def add_line(self):
+        s = ''
+        try:
+            x1 = float(self.lineEdit_x1.text())
+            print(x1)
+        except ValueError:
+            s += 'Координата x1 введена неправильно!\n'
+
+        try:
+            x2 = float(self.lineEdit_x2.text())
+            print(x2)
+        except ValueError:
+            s += 'Координата x2 введена неправильно!\n'
+
+        try:
+            y1 = float(self.lineEdit_y1.text())
+            print(y1)
+        except ValueError:
+            s += 'Координата y1 введена неправильно!\n'
+
+        try:
+            y2 = float(self.lineEdit_y2.text())
+            print(y2)
+        except ValueError:
+            s += 'Координата y2 введена неправильно!'
+
+        if s:
+            self.label_output.setText(s)
+        else:
+            self.label_output.setText('Линия построена!')
+            self.lineEdit_x1.setText(str(x2))
+            self.lineEdit_y1.setText(str(y2))
 
 # if __name__ == "__main__":
 #     app = QApplication(sys.argv)
