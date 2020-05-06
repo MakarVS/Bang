@@ -28,7 +28,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
         <property name="spacing">
          <number>50</number>
         </property>
@@ -58,7 +58,7 @@
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0">
-             <layout class="QVBoxLayout" name="two_points_layout" stretch="6,2,12,3">
+             <layout class="QVBoxLayout" name="two_points_layout" stretch="6,2,2,10,3">
               <property name="sizeConstraint">
                <enum>QLayout::SetDefaultConstraint</enum>
               </property>
@@ -207,7 +207,17 @@
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="layout_build_line" stretch="3,1">
+               <layout class="QHBoxLayout" name="layout_build_line" stretch="0,0,3,1">
+                <item>
+                 <widget class="QLabel" name="label_units">
+                  <property name="text">
+                   <string>Единицы измерения</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox_units"/>
+                </item>
                 <item>
                  <spacer name="horizontalSpacer">
                   <property name="orientation">
@@ -235,6 +245,13 @@
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
               </item>
               <item>
                <spacer name="verticalSpacer">
@@ -305,11 +322,74 @@
         </item>
         <item>
          <widget class="QTreeWidget" name="treeWidget">
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
+          </property>
+          <property name="dragEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>false</bool>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>true</bool>
+          </property>
+          <property name="uniformRowHeights">
+           <bool>false</bool>
+          </property>
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="allColumnsShowFocus">
+           <bool>false</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+          <property name="expandsOnDoubleClick">
+           <bool>true</bool>
+          </property>
+          <attribute name="headerVisible">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="headerCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="headerHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="headerShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="headerStretchLastSection">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
-            <string notr="true">1</string>
+            <string>Процесс</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>Описание</string>
+           </property>
+          </column>
+          <item>
+           <property name="text">
+            <string>Геометрия</string>
+           </property>
+           <property name="text">
+            <string>фыв</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Расчет</string>
+           </property>
+           <property name="text">
+            <string>йцу</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
@@ -381,7 +461,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>../icon/geometry.png</normaloff>../icon/geometry.png</iconset>
+     <normaloff>C:/Users/Vitaliy/.designer/icon/geometry.png</normaloff>C:/Users/Vitaliy/.designer/icon/geometry.png</iconset>
    </property>
    <property name="text">
     <string>action_geometry</string>
