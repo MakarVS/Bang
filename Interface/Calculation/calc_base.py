@@ -7,7 +7,7 @@ from PyQt5.QtCore import Qt, QSize, QCoreApplication, pyqtSlot, QPoint
 from PyQt5.QtGui import QPolygonF, QPainter, QBrush, QPen
 
 from Interface.Geometry.point import Point
-from Calculations import main_calculations
+from Calculations import calculations_one_velocity, calculations_pneum, calculations_thermo
 
 
 class CalculationWindow(QWidget):
@@ -69,7 +69,7 @@ class CalculationWindow(QWidget):
         self.line_3.setFrameShape(QFrame.VLine)
         self.line_3.setFrameShadow(QFrame.Sunken)
         self.line_3.setObjectName("line_3")
-        self.gridLayout_fields.addWidget(self.line_3, 0, 4, 5, 1)
+        self.gridLayout_fields.addWidget(self.line_3, 0, 4, 6, 1)
 
         spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.gridLayout_fields.addItem(spacerItem1, 0, 5, 1, 1)
@@ -88,15 +88,24 @@ class CalculationWindow(QWidget):
         self.comboBox_q.addItems(['Граммы', 'Килограммы'])
         self.gridLayout_fields.addWidget(self.comboBox_q, 0, 2, 1, 1)
 
-        self.label_n_cells = QLabel(self.base_params)
-        self.label_n_cells.setObjectName("label_n_cells")
-        self.label_n_cells.setText(self._translate("MainWindow", "Количество узлов разностной сетки"))
-        self.gridLayout_fields.addWidget(self.label_n_cells, 0, 6, 1, 1)
+        self.label_T_env = QLabel(self.base_params)
+        self.label_T_env.setObjectName("label_T_env")
+        self.label_T_env.setText(self._translate("MainWindow", "Температура окражающей среды"))
+        self.gridLayout_fields.addWidget(self.label_T_env, 1, 0, 1, 1)
 
-        self.lineEdit_n_cells = QLineEdit(self.base_params)
-        self.lineEdit_n_cells.setObjectName("lineEdit_n_cells")
-        self.lineEdit_n_cells.setText('100')
-        self.gridLayout_fields.addWidget(self.lineEdit_n_cells, 0, 7, 1, 1)
+        self.lineEdit_T_env = QLineEdit(self.base_params)
+        self.lineEdit_T_env.setObjectName("lineEdit_T_env")
+        self.gridLayout_fields.addWidget(self.lineEdit_T_env, 1, 1, 1, 1)
+
+        self.comboBox_T_env = QComboBox(self.base_params)
+        self.comboBox_T_env.setObjectName("comboBox_T_env")
+        self.comboBox_T_env.addItems(['К', '⁰С'])
+        self.gridLayout_fields.addWidget(self.comboBox_T_env, 1, 2, 1, 1)
+
+        self.label_type = QLabel(self.base_params)
+        self.label_type.setObjectName("label_type")
+        self.label_type.setText(self._translate("MainWindow", "Тип рабочего тела"))
+        self.gridLayout_fields.addWidget(self.label_type, 2, 0, 1, 1)
 
         self.comboBox_type = QComboBox(self.base_params)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
@@ -107,95 +116,132 @@ class CalculationWindow(QWidget):
         self.comboBox_type.setObjectName("comboBox_type")
         self.comboBox_type.addItems(['Порох', 'Газ'])
         self.comboBox_type.currentIndexChanged.connect(self.change_work_body)
-        self.gridLayout_fields.addWidget(self.comboBox_type, 1, 1, 1, 1)
-
-        self.label_type = QLabel(self.base_params)
-        self.label_type.setObjectName("label_type")
-        self.label_type.setText(self._translate("MainWindow", "Тип рабочего тела"))
-        self.gridLayout_fields.addWidget(self.label_type, 1, 0, 1, 1)
+        self.gridLayout_fields.addWidget(self.comboBox_type, 2, 1, 1, 1)
 
         self.label_border_cam = QLabel(self.base_params)
         self.label_border_cam.setObjectName("label_border_cam")
-        self.label_border_cam.setText(self._translate("MainWindow",
-                                                 "<html><head/><body><p>Выберите правую границу </p><p>камеры "
-                                                 "сгорания</p></body></html>"))
-        self.gridLayout_fields.addWidget(self.label_border_cam, 2, 0, 1, 1)
+        self.label_border_cam.setText(self._translate("MainWindow","Выберите правую границу\n"
+                                                                   "камеры сгорания"))
+        self.gridLayout_fields.addWidget(self.label_border_cam, 3, 0, 1, 1)
 
         self.lineEdit_border_cam = QLineEdit(self.base_params)
         self.lineEdit_border_cam.setObjectName("lineEdit_border_cam")
-        self.gridLayout_fields.addWidget(self.lineEdit_border_cam, 2, 1, 1, 1)
+        self.gridLayout_fields.addWidget(self.lineEdit_border_cam, 3, 1, 1, 1)
 
         self.pushButton_border_cam = QPushButton(self.base_params)
         self.pushButton_border_cam.setObjectName("pushButton_border_cam")
         self.pushButton_border_cam.clicked.connect(self.choose_border_cam_true)
         self.pushButton_border_cam.setText(self._translate("MainWindow", "Выбрать"))
-        self.gridLayout_fields.addWidget(self.pushButton_border_cam, 2, 2, 1, 1)
+        self.gridLayout_fields.addWidget(self.pushButton_border_cam, 3, 2, 1, 1)
 
         self.label_points_geom_barell = QLabel(self.base_params)
         self.label_points_geom_barell.setObjectName("label_points_geom_barell")
         self.label_points_geom_barell.setText(self._translate("MainWindow", "Выберите точки, через\n"
                                                                             "которые проходит внутренняя\n"
                                                                             "стенка канала ствола"))
-        self.gridLayout_fields.addWidget(self.label_points_geom_barell, 3, 0, 1, 1)
+        self.gridLayout_fields.addWidget(self.label_points_geom_barell, 4, 0, 1, 1)
 
         self.lineEdit_points_geom_barell = QLineEdit(self.base_params)
         self.lineEdit_points_geom_barell.setObjectName("lineEdit_points_geom_barell")
-        self.gridLayout_fields.addWidget(self.lineEdit_points_geom_barell, 3, 1, 1, 1)
+        self.gridLayout_fields.addWidget(self.lineEdit_points_geom_barell, 4, 1, 1, 1)
 
         self.pushButton_points_geom_barell = QPushButton(self.base_params)
         self.pushButton_points_geom_barell.setObjectName("pushButton_points_geom_barell")
         self.pushButton_points_geom_barell.setText(self._translate("MainWindow", "Выбрать"))
         self.pushButton_points_geom_barell.clicked.connect(self.choose_points_geom_barell_true)
-        self.gridLayout_fields.addWidget(self.pushButton_points_geom_barell, 3, 2, 1, 1)
+        self.gridLayout_fields.addWidget(self.pushButton_points_geom_barell, 4, 2, 1, 1)
 
         self.pushButton_points_geom_barell_finaly = QPushButton(self.base_params)
         self.pushButton_points_geom_barell_finaly.setObjectName("pushButton_points_geom_barell_finaly")
         self.pushButton_points_geom_barell_finaly.setText(self._translate("MainWindow", "Завершить"))
         self.pushButton_points_geom_barell_finaly.clicked.connect(self.choose_points_geom_barell_false)
-        self.gridLayout_fields.addWidget(self.pushButton_points_geom_barell_finaly, 3, 3, 1, 1)
+        self.gridLayout_fields.addWidget(self.pushButton_points_geom_barell_finaly, 4, 3, 1, 1)
 
         self.label_points_wall = QLabel(self.base_params)
         self.label_points_wall.setObjectName("label_points_wall")
         self.label_points_wall.setText(self._translate("MainWindow", "Выберите точки, которые \n"
                                                                      "ограничивают периметр \n"
                                                                      "стенки ствола"))
-        self.gridLayout_fields.addWidget(self.label_points_wall, 4, 0, 1, 1)
+        self.gridLayout_fields.addWidget(self.label_points_wall, 5, 0, 1, 1)
 
         self.lineEdit_points_wall = QLineEdit(self.base_params)
         self.lineEdit_points_wall.setObjectName("lineEdit_points_wall")
-        self.gridLayout_fields.addWidget(self.lineEdit_points_wall, 4, 1, 1, 1)
+        self.gridLayout_fields.addWidget(self.lineEdit_points_wall, 5, 1, 1, 1)
 
         self.pushButton_points_wall = QPushButton(self.base_params)
         self.pushButton_points_wall.setObjectName("pushButton_points_wall")
         self.pushButton_points_wall.setText(self._translate("MainWindow", "Выбрать"))
         self.pushButton_points_wall.clicked.connect(self.choose_points_wall_true)
-        self.gridLayout_fields.addWidget(self.pushButton_points_wall, 4, 2, 1, 1)
+        self.gridLayout_fields.addWidget(self.pushButton_points_wall, 5, 2, 1, 1)
 
         self.pushButton_points_wall_finaly = QPushButton(self.base_params)
         self.pushButton_points_wall_finaly.setObjectName("pushButton_points_wall_finaly")
         self.pushButton_points_wall_finaly.setText(self._translate("MainWindow", "Завершить"))
         self.pushButton_points_wall_finaly.clicked.connect(self.choose_points_wall_false)
-        self.gridLayout_fields.addWidget(self.pushButton_points_wall_finaly, 4, 3, 1, 1)
+        self.gridLayout_fields.addWidget(self.pushButton_points_wall_finaly, 5, 3, 1, 1)
+
+        # self.label_charact_calc = QLabel(self.base_params)
+        # self.label_charact_calc.setObjectName("label_charact_calc")
+        # self.label_charact_calc.setText(self._translate("MainWindow", "Характеристики расчета"))
+        # self.gridLayout_fields.addWidget(self.label_charact_calc, 0, 6, 1, 2)
+        #
+        # self.line_charact_calc = QFrame(self.base_params)
+        # self.line_charact_calc.setFrameShape(QFrame.HLine)
+        # self.line_charact_calc.setFrameShadow(QFrame.Sunken)
+        # self.line_charact_calc.setObjectName("line_charact_calc")
+        # self.gridLayout_fields.addWidget(self.line_charact_calc, 1, 6, 1, 2)
+
+        self.label_n_cells = QLabel(self.base_params)
+        self.label_n_cells.setObjectName("label_n_cells")
+        self.label_n_cells.setText(self._translate("MainWindow", "Количество узлов разностной сетки\n"
+                                                                 "по осевой координате"))
+        self.gridLayout_fields.addWidget(self.label_n_cells, 0, 6, 1, 1)
+
+        self.lineEdit_n_cells = QLineEdit(self.base_params)
+        self.lineEdit_n_cells.setObjectName("lineEdit_n_cells")
+        self.lineEdit_n_cells.setText('100')
+        self.gridLayout_fields.addWidget(self.lineEdit_n_cells, 0, 7, 1, 1)
+
+        self.label_n_cells_r = QLabel(self.base_params)
+        self.label_n_cells_r.setObjectName("label_n_cells_r")
+        self.label_n_cells_r.setText(self._translate("MainWindow", "Количество узлов разностной сетки\n"
+                                                                   "по радиальной координате"))
+        self.gridLayout_fields.addWidget(self.label_n_cells_r, 1, 6, 1, 1)
+
+        self.lineEdit_n_cells_r = QLineEdit(self.base_params)
+        self.lineEdit_n_cells_r.setObjectName("lineEdit_n_cells_r")
+        self.lineEdit_n_cells_r.setText('100')
+        self.gridLayout_fields.addWidget(self.lineEdit_n_cells_r, 1, 7, 1, 1)
 
         self.label_Ku = QLabel(self.base_params)
         self.label_Ku.setObjectName("label_Ku")
         self.label_Ku.setText(self._translate("MainWindow", "Число Куранта"))
-        self.gridLayout_fields.addWidget(self.label_Ku, 1, 6, 1, 1)
+        self.gridLayout_fields.addWidget(self.label_Ku, 2, 6, 1, 1)
 
         self.lineEdit_Ku = QLineEdit(self.base_params)
         self.lineEdit_Ku.setObjectName("lineEdit_Ku")
         self.lineEdit_Ku.setText('0.15')
-        self.gridLayout_fields.addWidget(self.lineEdit_Ku, 1, 7, 1, 1)
+        self.gridLayout_fields.addWidget(self.lineEdit_Ku, 2, 7, 1, 1)
 
         self.label_n_shoots = QLabel(self.base_params)
         self.label_n_shoots.setObjectName("label_n_shoots")
         self.label_n_shoots.setText(self._translate("MainWindow", "Количество выстрелов"))
-        self.gridLayout_fields.addWidget(self.label_n_shoots, 2, 6, 1, 1)
+        self.gridLayout_fields.addWidget(self.label_n_shoots, 3, 6, 1, 1)
 
         self.lineEdit_n_shoots = QLineEdit(self.base_params)
         self.lineEdit_n_shoots.setObjectName("lineEdit_n_shoots")
         self.lineEdit_n_shoots.setText('1')
-        self.gridLayout_fields.addWidget(self.lineEdit_n_shoots, 2, 7, 1, 1)
+        self.gridLayout_fields.addWidget(self.lineEdit_n_shoots, 3, 7, 1, 1)
+
+        self.label_t_end = QLabel(self.base_params)
+        self.label_t_end.setObjectName("label_t_end")
+        self.label_t_end.setText(self._translate("MainWindow", "Время расчета теплопередачи, c"))
+        self.gridLayout_fields.addWidget(self.label_t_end, 4, 6, 1, 1)
+
+        self.lineEdit_t_end = QLineEdit(self.base_params)
+        self.lineEdit_t_end.setObjectName("lineEdit_t_end")
+        self.lineEdit_t_end.setText('1')
+        self.gridLayout_fields.addWidget(self.lineEdit_t_end, 4, 7, 1, 1)
 
         spacerItem2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.gridLayout_fields.addItem(spacerItem2, 0, 3, 1, 1)
@@ -241,7 +287,7 @@ class CalculationWindow(QWidget):
         self.verticalLayout.addLayout(self.horizontalLayout_button)
         self.verticalLayout.setStretch(0, 3)
         self.verticalLayout.setStretch(1, 9)
-        self.verticalLayout.setStretch(2, 6)
+        self.verticalLayout.setStretch(2, 13)
 
         self.tabWidget.addTab(self.base_params, "")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.base_params),
@@ -415,15 +461,15 @@ class CalculationWindow(QWidget):
         self.lineEdit_zk.setObjectName("lineEdit_zk")
         self.gridLayout_charact_wo_coef.addWidget(self.lineEdit_zk, 5, 1, 1, 1)
 
-        self.label_nu = QLabel(self.params_powder)
-        self.label_nu.setObjectName("label_nu")
-        self.label_nu.setText(self._translate("MainWindow", "Показатель в законе горения"))
-        self.gridLayout_charact_wo_coef.addWidget(self.label_nu, 6, 0, 1, 1)
+        self.label_T_1 = QLabel(self.params_powder)
+        self.label_T_1.setObjectName("label_nu")
+        self.label_T_1.setText(self._translate("MainWindow", "Температура поверхности горения\n"
+                                                             "порохового зерна, К"))
+        self.gridLayout_charact_wo_coef.addWidget(self.label_T_1, 6, 0, 1, 1)
 
-        self.lineEdit_nu = QLineEdit(self.params_powder)
-        self.lineEdit_nu.setObjectName("lineEdit_nu")
-        self.lineEdit_nu.setText('1')
-        self.gridLayout_charact_wo_coef.addWidget(self.lineEdit_nu, 6, 1, 1, 1)
+        self.lineEdit_T_1 = QLineEdit(self.params_powder)
+        self.lineEdit_T_1.setObjectName("lineEdit_nu")
+        self.gridLayout_charact_wo_coef.addWidget(self.lineEdit_T_1, 6, 1, 1, 1)
 
         self.gridLayout_charact_wo_coef.setColumnStretch(0, 3)
         self.verticalLayout_charact_powder.addLayout(self.gridLayout_charact_wo_coef)
@@ -717,12 +763,12 @@ class CalculationWindow(QWidget):
         self.lineEdit_sigma_v.setObjectName("lineEdit_sigma_v")
         self.gridLayout_3.addWidget(self.lineEdit_sigma_v, 1, 1, 1, 1)
 
-        self.label_2_lambda_materials = QLabel(self.params_materials)
-        self.label_2_lambda_materials.setObjectName("label_2_lambda_materials")
-        self.label_2_lambda_materials.setText(self._translate("MainWindow",
+        self.label_lambda_materials = QLabel(self.params_materials)
+        self.label_lambda_materials.setObjectName("label_lambda_materials")
+        self.label_lambda_materials.setText(self._translate("MainWindow",
                                                               "<html><head/><body><p>Коэффициент теплопроводности, "
                                                               "Вт/(м ∙ ⁰С)</p></body></html>"))
-        self.gridLayout_3.addWidget(self.label_2_lambda_materials, 2, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.label_lambda_materials, 2, 0, 1, 1)
 
         self.lineEdit_lambda_materials = QLineEdit(self.params_materials)
         self.lineEdit_lambda_materials.setObjectName("lineEdit_lambda_materials")
@@ -791,6 +837,7 @@ class CalculationWindow(QWidget):
                                                              == text]['ro'].values[0], 4)))
         self.lineEdit_gamma.setText(str(round(self.powder_base[self.powder_base['name']
                                                                == text]['etta'].values[0] + 1, 4)))
+        self.lineEdit_T_1.setText(str(self.powder_base[self.powder_base['name'] == text]['T_1'].values[0]))
         self.lineEdit_covolum.setText(str(round(self.powder_base[self.powder_base['name']
                                                                  == text]['alpha_k'].values[0], 4)))
         self.lineEdit_zk.setText(str(round(self.powder_base[self.powder_base['name']
@@ -859,21 +906,43 @@ class CalculationWindow(QWidget):
 
     def run_calculations_run(self):
         q = self.lineEdit_q.text()
+        T_env = self.lineEdit_T_env.text()
         bord = self.lineEdit_border_cam.text()
         wall_points = self.lineEdit_points_wall.text()
         geom_bar_points = self.lineEdit_points_geom_barell.text()
+        points_wall = self.lineEdit_points_wall.text()
         n_cells = self.lineEdit_n_cells.text()
+        n_cells_r = self.lineEdit_n_cells_r.text()
         Ku = self.lineEdit_Ku.text()
         n_shoots = self.lineEdit_n_shoots.text()
+        t_end = self.lineEdit_t_end.text()
 
-        if q and bord and wall_points and geom_bar_points and n_cells and Ku and n_shoots:
+        rho_materials = self.lineEdit_rho_materials.text()
+        sigma_v = self.lineEdit_sigma_v.text()
+        lambda_materials = self.lineEdit_lambda_materials.text()
+        cp_materials = self.lineEdit_cp_materials.text()
+
+        if q and T_env and bord and wall_points and geom_bar_points and points_wall \
+        and n_cells and n_cells_r and Ku and n_shoots and t_end\
+        and rho_materials and sigma_v and lambda_materials and cp_materials:
             q = float(q.replace(',', '.'))
             q_dimension = self.comboBox_q.currentText()
             q = q if q_dimension == 'Килограммы' else (q / 1000)
 
+            T_env = float(T_env.replace(',', '.'))
+            T_env_dimension = self.comboBox_T_env.currentText()
+            T_env = (T_env-273.15) if T_env_dimension == 'К' else T_env
+
             n_cells = int(n_cells)
+            n_cells_r = int(n_cells_r)
             Ku = float(Ku.replace(',', '.'))
             n_shoots = int(n_shoots)
+            t_end = float(t_end)
+
+            rho_materials = float(rho_materials)
+            sigma_v = float(sigma_v)
+            lambda_materials = float(lambda_materials)
+            cp_materials = float(cp_materials)
 
             units = self.tree.model().rootItem.childItems[0].itemData[0][1].combobox_units.currentText()
             if units == 'Милиметры':
@@ -890,7 +959,21 @@ class CalculationWindow(QWidget):
                 geom_barell.append(((point.x - self.graphics.init_delta_x) / self.graphics.coef_scale / coef_units,
                                     (point.y - self.graphics.init_delta_y) * 2 / self.graphics.coef_scale / coef_units))
 
+            R_out = 0
+            r_in = 100000000
+            L = 0
+            for point in self.points_wall_list:
+                buf_L = (point.x - self.graphics.init_delta_x) / self.graphics.coef_scale / coef_units
+                buf_r = (point.y - self.graphics.init_delta_y) / self.graphics.coef_scale / coef_units
+                if buf_L > L:
+                    L = buf_L
+                if buf_r > R_out:
+                    R_out = buf_r
+                if buf_r < r_in:
+                    r_in = buf_r
+
             text = self.comboBox_type.currentText()
+
             if text == 'Порох':
                 I_k = self.lineEdit_Ik.text()
                 Z_k = self.lineEdit_zk.text()
@@ -900,12 +983,12 @@ class CalculationWindow(QWidget):
                 k_1 = self.lineEdit_kappa_1.text()
                 lambda_1 = self.lineEdit_lambda1_1.text()
                 ro = self.lineEdit_rho.text()
-                nu = self.lineEdit_nu.text()
+                T_1 = self.lineEdit_T_1.text()
 
                 omega = self.lineEdit_omega.text()
                 p_f = self.lineEdit_pf.text()
 
-                if I_k and Z_k and alpha_k and etta and f and k_1 and lambda_1 and ro and nu and omega and p_f:
+                if I_k and Z_k and alpha_k and etta and f and k_1 and lambda_1 and ro and T_1 and omega and p_f:
                     omega = float(omega.replace(',', '.'))
                     omega_dimension = self.comboBox_q.currentText()
                     omega = omega if omega_dimension == 'Килограммы' else (omega / 1000)
@@ -915,11 +998,12 @@ class CalculationWindow(QWidget):
                     p_f = p_f if p_f_dimension == 'Па' else (p_f * 1_000_000)
 
                     powder = dict(gamma=float(etta.replace(',', '.')) + 1,
-                                  nu=float(nu.replace(',', '.')),
+                                  nu=1,
                                   param_powder={'I_k': float(I_k.replace(',', '.')),
                                                 'Z_k': float(Z_k.replace(',', '.')),
                                                 'alpha_k': float(alpha_k.replace(',', '.')),
                                                 'etta': float(etta.replace(',', '.')) - 1,
+                                                'T_1': float(T_1.replace(',', '.')),
                                                 'f': float(f.replace(',', '.')),
                                                 'k_1': float(k_1.replace(',', '.')),
                                                 'k_2': None,
@@ -929,15 +1013,90 @@ class CalculationWindow(QWidget):
                                                 'lambda_2': None,
                                                 'name': self.comboBox_mark.currentText(),
                                                 'ro': float(ro.replace(',', '.'))})
-                    solver = main_calculations.solver(q=q,
-                                                      p_f=p_f,
-                                                      x_bord=x_bord_cam,
-                                                      geom=geom_barell,
-                                                      powder=powder,
-                                                      omega=omega,
-                                                      n_cells=n_cells,
-                                                      Ku=Ku)
-                    main_calculations.calc_run(solver)
+                    solver = calculations_one_velocity.solver(q=q,
+                                                              p_f=p_f,
+                                                              x_bord=x_bord_cam,
+                                                              geom=geom_barell,
+                                                              powder=powder,
+                                                              omega=omega,
+                                                              n_cells=n_cells,
+                                                              Ku=Ku,
+                                                              sigma_v=sigma_v,
+                                                              R=R_out,
+                                                              r=r_in)
+                    self.main_window.change_statusbar('Идет рассчёт')
+                    T_in = calculations_one_velocity.calc_run(solver)
+                    self.main_window.change_statusbar('Рассчёт окончен')
+
+                    solver_heat = calculations_thermo.solver_thermo(ro=rho_materials,
+                                                                    cp=cp_materials,
+                                                                    lambd=lambda_materials,
+                                                                    n_x=n_cells,
+                                                                    n_r=n_cells_r,
+                                                                    L=L,
+                                                                    R=R_out,
+                                                                    r=r_in,
+                                                                    t_end=t_end,
+                                                                    T_env=T_env,
+                                                                    T_in=T_in)
+
+                    self.main_window.change_statusbar('Идет рассчёт')
+                    calculations_thermo.calc_run(solver_heat)
+                    self.main_window.change_statusbar('Рассчёт окончен')
+                else:
+                    self.main_window.change_statusbar('НЕ ВСЕ ПОЛЯ ЗАПОЛНЕНЫ!!!')
+            elif text == 'Газ':
+                p = self.lineEdit_pressure_gas.text()
+                T = self.lineEdit_temp_gas.text()
+                R = self.lineEdit_R_gas.text()
+                gamma = self.lineEdit_gamma_gas.text()
+                covolum = self.lineEdit_covolum_gas.text()
+
+                if p and T and R and gamma and covolum:
+                    p = float(p.replace(',', '.'))
+                    p_dimension = self.comboBox_pressure_gas.currentText()
+                    p = p if p_dimension == 'Па' else (p * 1_000_000)
+
+                    T = float(T.replace(',', '.'))
+                    T_dimension = self.comboBox_temp_gas.currentText()
+                    T = T if T_dimension == 'К' else (T + 273.15)
+
+                    gas = dict(R=float(R.replace(',', '.')), covolume=float(covolum.replace(',', '.')),
+                               gamma=float(gamma.replace(',', '.')))
+
+                    solver = calculations_pneum.solver(q=q,
+                                                       x_bord=x_bord_cam,
+                                                       geom=geom_barell,
+                                                       gas=gas,
+                                                       T=T,
+                                                       p=p,
+                                                       n_cells=n_cells,
+                                                       Ku=Ku,
+                                                       sigma_v=sigma_v,
+                                                       R=R_out,
+                                                       r=r_in)
+
+                    # print(solver)
+                    self.main_window.change_statusbar('Идет рассчёт')
+                    T_in = calculations_pneum.calc_run(solver) - 273.15
+                    self.main_window.change_statusbar('Рассчёт окончен')
+
+                    solver_heat = calculations_thermo.solver_thermo(ro=rho_materials,
+                                                                    cp=cp_materials,
+                                                                    lambd=lambda_materials,
+                                                                    n_x=n_cells,
+                                                                    n_r=n_cells_r,
+                                                                    L=L,
+                                                                    R=R_out,
+                                                                    r=r_in,
+                                                                    t_end=t_end,
+                                                                    T_env=T_env,
+                                                                    T_in=T_in)
+
+                    self.main_window.change_statusbar('Идет рассчёт')
+                    calculations_thermo.calc_run(solver_heat)
+                    self.main_window.change_statusbar('Рассчёт окончен')
+
                 else:
                     self.main_window.change_statusbar('НЕ ВСЕ ПОЛЯ ЗАПОЛНЕНЫ!!!')
         else:

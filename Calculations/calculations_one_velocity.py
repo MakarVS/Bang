@@ -1,4 +1,5 @@
 import time
+import numpy as np
 
 from Calculations.OneVelocity.OvInit import ov_create_layer
 from Calculations.Invariants.WriteToJson import write_to_file
@@ -7,7 +8,7 @@ from Calculations.Invariants.Plot import plot_one
 # !!!!!!!!!!!!!!!!!!!!!!!! РАБОЧАЯ ПРОГРАММА !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-def solver(q, p_f, x_bord, geom, powder, omega, n_cells, Ku):
+def solver(q, p_f, x_bord, geom, powder, omega, n_cells, Ku, sigma_v, R, r):
     return {'borders': [{'m': 1000, 'p_f': 1e8, 'x': 0, 'V': 0},
                         {'m': q, 'p_f': p_f, 'x': x_bord, 'V': 0}],
             'geom': geom,
@@ -18,6 +19,9 @@ def solver(q, p_f, x_bord, geom, powder, omega, n_cells, Ku):
                        'name': 'powder',
                        'type': 'powder'}],
             'q': q,
+            'sigma_v': sigma_v,
+            'R': R,
+            'r': r,
             'courant_number': Ku}
 
 
@@ -47,6 +51,13 @@ def calc_run(solver):
 
         if (Vmax - layer.V[-1]) > 1:
             break
+
+        sigma = 2 / 3 * layer.p * (2 * layer.R_out ** 2 + layer.r_in ** 2) / (layer.R_out ** 2 - layer.r_in ** 2)
+
+        if sum(layer.sigma_v >= sigma) != layer.n:
+            print('Не соблюдается условие прочности! Превышен предел упругости материала!')
+            break
+
         tau = solver['courant_number'] * layer.time_step()  # Вычисление шага по времени
         layer1 = layer.euler_step(layer, tau)
         layer = layer1
@@ -60,12 +71,19 @@ def calc_run(solver):
         if layer.V[-1] > Vmax:
             Vmax = layer.V[-1]
 
+    T = layer.powd.etta * (layer.q[2] / layer.q[0] - 0.5 * np.square(layer.q[1] / layer.q[0])) \
+        / (layer.powd.f / layer.powd.T_1)
+
     print("--- %s seconds ---" % (time.time() - start_time))
 
+    print('Условие прочности соблюдается!')
     print('Время вылета:', time_arr[-1], 'с')
     print('Скорость вылета:', V_arr[-1], 'м/с')
+    print(T)
 
     plot_one(time_arr, V_arr, 'График скорости снаряда от времени', 'Время', 'Скорость')
     plot_one(x_arr, V_arr, 'График скорости снаряда от времени', 'Координата', 'Скорость')
     plot_one(time_arr, p_arr_sn, 'График давления на дно снаряда от времени', 'Время', 'Давление')
     plot_one(time_arr, p_arr_dn, 'График давления на дно снаряда от времени', 'Время', 'Давление')
+
+    return T

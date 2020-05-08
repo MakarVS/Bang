@@ -1,13 +1,13 @@
-import numpy as np
 import copy
 
-from Calculations.OneVelocity.OvAUSMplus import get_f
+import numpy as np
+
 from Calculations.Invariants.Constants import Constants
 from Calculations.Invariants.Tube import Tube
-from Calculations.Invariants.Powder import Powder
+from Calculations.Pneum.PnAUSMplus import get_f as pn_get_f
 
 
-class OvLayer(object):
+class PnLayer(object):
     def __init__(self, solver, func_in, get_x_v_left, get_x_v_right, get_flux_left, get_flux_right, number=0):
         # Время расчета
         self.time = 0
@@ -19,6 +19,9 @@ class OvLayer(object):
         self.m1 = solver['borders'][number]['m']
         # Масса правой границы
         self.m2 = solver['borders'][number+1]['m']
+        # Давление форсирования
+        self.p_fors1 = solver['borders'][number]['p_f']
+        self.p_fors2 = solver['borders'][number+1]['p_f']
         self.solver = solver
         self.func_in = func_in
         # Количество ячеек
@@ -34,44 +37,32 @@ class OvLayer(object):
         self.V = np.linspace(solver['borders'][number]['V'], solver['borders'][number+1]['V'], self.n + 1,
                              dtype=np.float64)
         # Константы с показателем адиабаты и коволюм
-        self.const = Constants(solver['grids'][number]['consts']['gamma'])
+        self.const = Constants(solver['grids'][number]['consts']['gamma'], solver['grids'][number]['consts']['covolume'])
         # Параметры трубы
         buf = list(zip(*(solver['geom'])))
         self.tube = Tube(buf[0], buf[1])
-        # Параметры пороха
-        self.powd = Powder(solver['grids'][number]['consts']['param_powder'])
-
-        self.t_init = solver['grids'][number]['init_const']['t_init']
-
-        # Давление форсирования
-        self.p_fors1 = solver['borders'][number]['p_f']
-        self.p_fors2 = solver['borders'][number+1]['p_f']
-
-        self.nu = solver['grids'][number]['consts']['nu']
 
         self.ds = self.tube.get_stuff(self.x)              # Нумпи массив dS/dx, размерностью n
         self.S = self.tube.get_S(self.x)                   # Нумпи массив площадей в координатах узлов, размерностью n+1
         self.W = self.tube.get_W(self.x)                   # Нумпи массив объемов, размерностью n
 
-        self.ro = np.zeros(self.n)
-        self.u = np.zeros(self.n)
-        self.p = np.zeros(self.n)
-        self.z = np.zeros(self.n)
+        self.ro = np.zeros(self.n, dtype=np.float64)
+        self.u = np.zeros(self.n, dtype=np.float64)
+        self.p = np.zeros(self.n, dtype=np.float64)
+
         self.sigma_v = np.full_like(self.p, solver['sigma_v']) * 1_000_000
+        self.R_const = np.full_like(self.p, solver['grids'][number]['consts']['R'])
+        self.covolume = np.full_like(self.p, solver['grids'][number]['consts']['covolume'])
         self.R_out = np.full_like(self.p, solver['R'])
         self.r_in = np.full_like(self.p, solver['r'])
 
-        W_km = self.tube.get_W([solver['borders'][number]['x'], solver['borders'][number+1]['x']])
-
         for i in range(self.n):
-            self.ro[i], self.u[i], self.p[i], self.z[i] = func_in(self.x_c[i], solver['grids'][number], W_km)
+            self.ro[i], self.u[i], self.p[i] = func_in(self.x_c[i], solver['grids'][number])
 
-        self.y = self.powd.psi(self.z)
-        self.e = self.get_energ(self.p, self.ro, self.y)
-
-        self.q = self.init_arr_q()                         # Список нумпи массивов q1, q2, q3, размерностями n
-
-        self.h = self.get_arr_h()           # Список нумпи массивов h1, h2, h3, размерностями n
+        if solver['grids'][number]['type'] == 'gas':
+            self.e = self.get_energ(self.p, self.ro)
+            self.q = self.init_arr_q()                  # Список нумпи массивов q1, q2, q3, размерностями n
+            self.h = self.get_arr_h()                   # Список нумпи массивов h1, h2, h3, размерностями n
 
         self.left_border = get_x_v_left                 # Получение левой координаты и скорости
         self.right_border = get_x_v_right               # Получение правой координаты и скорости
@@ -81,69 +72,70 @@ class OvLayer(object):
     def init_arr_q(self):
         """
         Инициализация вектора q
-        :return: список q1, q2, q3, q4
+        :return: список q1, q2, q3
         """
         q1 = self.ro
         q2 = self.ro * self.u
         q3 = self.ro * (self.e + 0.5 * np.square(self.u))
-        q4 = self.ro * self.z
-        return [q1, q2, q3, q4]
+        return [q1, q2, q3]
 
     def get_arr_h(self):
         """
         Получение вектора h
-        :param l: слой
-        :return: список h1, h2, h3, h4
+        :param p:
+        :param dS:
+        :return: список h1, h2, h3
         """
         h1 = np.zeros(self.n, dtype=np.float64)
         h2 = self.p * self.ds
         h3 = np.zeros(self.n, dtype=np.float64)
-        h4 = self.q[0] * self.tube.get_S(self.x_c) * (self.p ** self.nu) / self.powd.I_k
-        return [h1, h2, h3, h4]
+        return [h1, h2, h3]
 
-    def get_energ(self, p, ro, y):
-        return (p / self.const.g[9]) * (1 / ro - (1 - y) / self.powd.ro - self.powd.alpha_k * y) + \
-                        (1 - y) * self.powd.f / self.const.g[9]
+    def get_energ(self, p, ro):
+        """
+        Получение энергии
+        :param p: давление
+        :param ro: плотность
+        :return: энергия
+        """
+        return (p / self.const.g[9]) * (1 / ro - self.const.b)
 
     def get_pressure(self, q):
         """
         Получение давления
-        :param q: слой
+        :param q:
         :return: давление
         """
-        self.y = self.powd.psi(q[3] / q[0])
-        return (self.const.g[9] * (q[2] / q[0] - 0.5 * np.square(q[1] / q[0])) -
-                (1 - self.y) * self.powd.f) / (1 / q[0] - (1 - self.y) / self.powd.ro - self.powd.alpha_k * self.y)
+        e = q[2] / q[0] - 0.5 * np.square(q[1] / q[0])
+        return self.const.g[9] * e * q[0] / (1 - self.const.b * q[0])
 
-    def get_Csound(self, ro, p, y):
+    def get_Csound(self, ro, p):
         """
         Получение скорости звука
-        :param q: список q
+        :param ro: плотность
         :param p: давление
         :return: скорость звука
         """
-        # psi = self.powd.psi(z)
-        return np.sqrt(p / (self.const.g[8] * (1 / ro - (1 - y) / self.powd.ro - self.powd.alpha_k * y))) / ro
+        return np.sqrt(p / (self.const.g[8] * ro * (1 - self.const.b * ro)))
 
     def get_param(self, q):
         """
         Пересчет параметров газа из вектора q
-        :param q: список q1, q2, q3, q4
-        :return: плотность, скорость, внутреннюю энергию, относительную толщину сгоревшего свода
+        :param q: список q1, q2, q3
+        :return: плотность, скорость, внутреннюю энергию
         """
         ro = q[0]
         u = q[1] / q[0]
         e = q[2] / q[0] - 0.5 * (u ** 2)
-        z = q[3] / q[0]
-        return ro, u, e, z
+        return ro, u, e
 
     def time_step(self):
         """
         Получение максимального шага по времени
         :return: шаг по времени
         """
-        self.Cs = self.get_Csound(self.q[0], self.p, self.q[3] / self.q[0])
-        Vmax = max(self.Cs + np.abs(self.q[1]) / self.q[0])
+        Cs = self.get_Csound(self.q[0], self.p)
+        Vmax = max(Cs + np.abs(self.q[1]) / self.q[0])
         Vmax = max(Vmax, max(self.V))
         dx = min([self.x[i] - self.x[i - 1] for i in range(1, len(self.x))])
         tau = dx / Vmax
@@ -155,7 +147,8 @@ class OvLayer(object):
         :param l: слой
         :return: скопированный слой
         """
-        l1 = OvLayer(self.solver, self.func_in, self.left_border, self.right_border, self.flux_left, self.flux_right, self.number)
+        l1 = PnLayer(self.solver, self.func_in, self.left_border, self.right_border, self.flux_left,
+                     self.flux_right, self.number)
         l1.q = [np.copy(ar) for ar in l.q]
         l1.h = [np.copy(ar) for ar in l.h]
         l1.x = np.copy(l.x)
@@ -200,7 +193,7 @@ class OvLayer(object):
         """
         self.ds = self.tube.get_stuff(self.x)
         self.p = self.get_pressure(self.q)
-        f_left, f_right = get_f(self)
+        f_left, f_right = pn_get_f(self)
         S_left = self.tube.get_S(self.x[:-1])
         S_right = self.tube.get_S(self.x_right[:-1])
         self.h = self.get_arr_h()
@@ -240,3 +233,6 @@ class OvLayer(object):
             for i in range(self.smooth):
                 a += (p - self.p[i]) * self.S[i] / self.m1
             return a / self.smooth
+
+
+

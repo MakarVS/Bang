@@ -25,6 +25,7 @@ class Powder(object):
         self.z_k = param_powder['Z_k']
         self.alpha_k = param_powder['alpha_k']
         self.etta = param_powder['etta']
+        self.T_1 = param_powder['T_1']
         self.f = param_powder['f']
         self.k_1 = param_powder['k_1']
         self.k_2 = param_powder['k_2']

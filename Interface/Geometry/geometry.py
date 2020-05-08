@@ -248,23 +248,27 @@ class GeometryWindow(QWidget):
 
     def add_line(self):
         s = ''
+        x1 = self.lineEdit_x1.text().replace(',', '.')
+        x2 = self.lineEdit_x2.text().replace(',', '.')
+        y1 = self.lineEdit_y1.text().replace(',', '.')
+        y2 = self.lineEdit_y2.text().replace(',', '.')
         try:
-            x1 = float(self.lineEdit_x1.text())
+            x1 = float(x1)
         except ValueError:
             s += 'Координата x1 введена неправильно!\n'
 
         try:
-            x2 = float(self.lineEdit_x2.text())
+            x2 = float(x2)
         except ValueError:
             s += 'Координата x2 введена неправильно!\n'
 
         try:
-            y1 = float(self.lineEdit_y1.text())
+            y1 = float(y1)
         except ValueError:
             s += 'Координата y1 введена неправильно!\n'
 
         try:
-            y2 = float(self.lineEdit_y2.text())
+            y2 = float(y2)
         except ValueError:
             s += 'Координата y2 введена неправильно!'
 
