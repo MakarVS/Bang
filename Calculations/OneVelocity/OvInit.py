@@ -10,7 +10,6 @@ def func_in(x, grid, W_km):
     """
     if x:
         ro = grid['init_const']['omega'] / W_km
-        # ro = grid['init_const']['ro']
         u = 0
         p = 101325
         z = 0

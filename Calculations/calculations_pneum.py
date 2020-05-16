@@ -1,12 +1,25 @@
 import time
+
 from Calculations.Invariants.Plot import *
-from Calculations.Invariants.WriteToJson import write_to_file
 from Calculations.Pneum.PnInit import pn_create_layer
-from Calculations.HeatTransfer.ThermoLayer import ThermoLayer
 
 
-# !!!!!!!!!!!!!!!!!!!!!!!! РАБОЧАЯ ПРОГРАММА !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def solver(q, x_bord, geom, gas, T, p, n_cells, Ku, sigma_v, R, r):
+    """
+    Формирование словаря входных данных для расчета внутренней баллистики (газ)
+    :param q: масса снаряда
+    :param x_bord: координата x правой границы камеры сгорания
+    :param geom: список кортежей из координаты узла и диаметра
+    :param gas: словарь с характеристиками газа
+    :param T: начальная температура в камере
+    :param p: начальное давление в камере
+    :param n_cells: кол-во узлов рассчетной сетки
+    :param Ku: число Куранта
+    :param sigma_v: предел упругости материала
+    :param R: внешний радиус трубы (ствола)
+    :param r: внутренний радиус трубы (ствола)
+    :return: словарь входных данных
+    """
     return {'borders': [{'m': 1000, 'p_f': 1e8, 'x': 0, 'V': 0},
                         {'m': q, 'p_f': 101325, 'x': x_bord, 'V': 0}],
             'geom': geom,
@@ -22,6 +35,11 @@ def solver(q, x_bord, geom, gas, T, p, n_cells, Ku, sigma_v, R, r):
 
 
 def calc_run(solver):
+    """
+    Функция для рассчета внутренней баллистики (газ)
+    :param solver: словарь входных данных
+    :return: массив распределения температуры после вылета снаряда из ствола
+    """
     start_time = time.time()
 
     layer = pn_create_layer(solver)
@@ -32,6 +50,8 @@ def calc_run(solver):
     p_arr_sn = [layer.p[-1]]
     p_arr_dn = [layer.p[0]]
     Vmax = 0
+
+    flag = True
 
     results = [solver]
 
@@ -45,12 +65,14 @@ def calc_run(solver):
 
             break
         if (Vmax - layer.V[-1]) > 1:
+            flag = False
             print('Замедляется')
             break
 
         sigma = 2 / 3 * layer.p * (2 * layer.R_out ** 2 + layer.r_in ** 2) / (layer.R_out ** 2 - layer.r_in ** 2)
 
         if sum(layer.sigma_v >= sigma) != layer.n:
+            flag = False
             print('Не соблюдается условие прочности! Превышен предел упругости материала!')
             break
 
@@ -67,21 +89,21 @@ def calc_run(solver):
         if layer.V[-1] > Vmax:
             Vmax = layer.V[-1]
 
-    T = layer.p * (1 / layer.q[0] - layer.covolume) / layer.R_const
+    if flag:
+        T = layer.p * (1 / layer.q[0] - layer.covolume) / layer.R_const
 
-    print('Расчет закончен')
-    print("--- %s seconds ---" % (time.time() - start_time))
+        # print('Расчет закончен')
+        # print("--- %s seconds ---" % (time.time() - start_time))
+        #
+        # print('Условие прочности соблюдается!')
+        # print('Время вылета:', time_arr[-1], 'с')
+        # print('Скорость вылета:', V_arr[-1], 'м/с')
+        #
+        # plot_one(time_arr, V_arr, 'График скорости снаряда от времени', 'Время', 'Скорость')
+        # plot_one(x_arr, V_arr, 'График скорости снаряда от времени', 'Координата', 'Скорость')
+        # plot_one(time_arr, p_arr_sn, 'График давления на дно снаряда от времени', 'Время', 'Давление')
+        # plot_one(time_arr, p_arr_dn, 'График давления на дно ствола от времени', 'Время', 'Давление')
 
-    print('Условие прочности соблюдается!')
-    print('Время вылета:', time_arr[-1], 'с')
-    print('Скорость вылета:', V_arr[-1], 'м/с')
-    # print(T)
-
-    plot_one(time_arr, V_arr, 'График скорости снаряда от времени', 'Время', 'Скорость')
-    plot_one(x_arr, V_arr, 'График скорости снаряда от времени', 'Координата', 'Скорость')
-    plot_one(time_arr, p_arr_sn, 'График давления на дно снаряда от времени', 'Время', 'Давление')
-    plot_one(time_arr, p_arr_dn, 'График давления на дно ствола от времени', 'Время', 'Давление')
-    # plot_contours(x_c_arr, x_c_arr[0], time_arr, p_arr, 'Распределение давления', 'Координата', 'Время')
-    # plot_muzzle(results[0])
-
-    return T
+        return results, T, True
+    else:
+        return None, None, False

@@ -2,20 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e7222ce-8a76-4ef5-af73-d6bfe4388287" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Calculations/HeatTransfer/ThermoLayer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/Pneum/PnAUSMplus.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/Pneum/PnBorder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/Pneum/PnInit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/Pneum/PnLayer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/Pneum/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/calculations_pneum.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Calculations/calculations_thermo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Interface/Postprocessing/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Interface/Postprocessing/plot_canvas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Interface/Postprocessing/postproc_base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bang.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/Analysis-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/EXE-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/PKG-00.pkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/PKG-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/PYZ-00.pyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/PYZ-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/Tree-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/Tree-01.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/base_library.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/main_test.exe.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/warn-main_test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/main_test/xref-main_test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/bases/gas_base.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/bases/materials_base.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/bases/powder_base.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/bang.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/close_file.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/geometry.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/icons.qrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/new_file.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/shoot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/icon/shoot_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/main_test.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/draft_3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/bang.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/shoot_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_test.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui_designer/test_post.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui_designer/test_post.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/HeatTransfer/ThermoLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/HeatTransfer/ThermoLayer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Invariants/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Invariants/Constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Invariants/MoveWithoutPowder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Invariants/Plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Invariants/Plot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Calculations/Invariants/Powder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Invariants/Powder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Invariants/Tube.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Invariants/Tube.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/OneVelocity/OvBorder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/OneVelocity/OvBorder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/OneVelocity/OvInit.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/OneVelocity/OvInit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Calculations/OneVelocity/OvLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/OneVelocity/OvLayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calculations/main_calculations.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/calculations_one_velocity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Pneum/PnBorder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Pneum/PnBorder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Pneum/PnInit.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Pneum/PnInit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/Pneum/PnLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/Pneum/PnLayer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/calculations_one_velocity.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/calculations_one_velocity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/calculations_pneum.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/calculations_pneum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculations/calculations_thermo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculations/calculations_thermo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interface/Calculation/calc_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/Calculation/calc_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interface/Geometry/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/Geometry/geometry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interface/main_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/main_interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +87,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PowderMultiprocBallistic" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="last_opened_file_path" value="E:/PowderMultiprocBallistic" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -59,6 +99,50 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main_test (1)">
+    <configuration name="MainWindow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="test_pyqt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\test_pyqt\test_interf_venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../15-minute-apps-master/15-minute-apps-master/paint/MainWindow.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Powder" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="test_pyqt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\test_pyqt\test_interf_venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Calculations/Invariants/Powder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="test_pyqt" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,7 +165,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="calc_base" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="draft_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="test_pyqt" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -94,73 +178,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Interface/Calculation/calc_base.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="calculations_one_velocity" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="test_pyqt" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\test_pyqt\test_interf_venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\test_pyqt_final_geometry\Calculations\calculations_one_velocity.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="geometry" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="test_pyqt" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\test_pyqt\test_interf_venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Interface/Geometry/geometry.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="graphics_view" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="test_pyqt" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\test_pyqt\test_interf_venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Interface/Graphics/graphics_view.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/draft_3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -191,20 +209,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="paint" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="test_pyqt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\test_pyqt\test_interf_venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../15-minute-apps-master/15-minute-apps-master/paint/paint.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.main_test (1)" />
-      <item itemvalue="Python.calc_base" />
-      <item itemvalue="Python.geometry" />
-      <item itemvalue="Python.graphics_view" />
-      <item itemvalue="Python.main_calculations_one_velocity" />
+      <item itemvalue="Python.Powder" />
+      <item itemvalue="Python.draft_3" />
+      <item itemvalue="Python.MainWindow" />
+      <item itemvalue="Python.paint" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_test (1)" />
-        <item itemvalue="Python.calc_base" />
-        <item itemvalue="Python.main_calculations_one_velocity" />
-        <item itemvalue="Python.graphics_view" />
-        <item itemvalue="Python.geometry" />
+        <item itemvalue="Python.paint" />
+        <item itemvalue="Python.MainWindow" />
+        <item itemvalue="Python.draft_3" />
+        <item itemvalue="Python.Powder" />
       </list>
     </recent_temporary>
   </component>
@@ -258,7 +298,11 @@
       <workItem from="1588605287816" duration="8040000" />
       <workItem from="1588776516389" duration="13612000" />
       <workItem from="1588859842445" duration="4066000" />
-      <workItem from="1588934012746" duration="21024000" />
+      <workItem from="1588934012746" duration="21777000" />
+      <workItem from="1589030663034" duration="1240000" />
+      <workItem from="1589191362255" duration="4164000" />
+      <workItem from="1589376022440" duration="9201000" />
+      <workItem from="1589450561136" duration="36949000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит. Научился создавать окно с баром.">
       <created>1584306929621</created>
@@ -288,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585731936293</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Все рабочие расчеты в первом приближении. Добавил теплопередачу к расчету пороха и газа.">
+      <created>1588967262046</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588967262046</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,7 +348,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит. Научился создавать окно с баром." />
     <MESSAGE value="Начал строить окно с геометрией." />
-    <option name="LAST_COMMIT_MESSAGE" value="Начал строить окно с геометрией." />
+    <MESSAGE value="Все рабочие расчеты в первом приближении. Добавил теплопередачу к расчету пороха и газа." />
+    <option name="LAST_COMMIT_MESSAGE" value="Все рабочие расчеты в первом приближении. Добавил теплопередачу к расчету пороха и газа." />
   </component>
   <component name="WindowStateProjectService">
     <state x="872" y="359" key="#Inspections" timestamp="1588497815915">
@@ -319,20 +371,20 @@
     </state>
     <state x="-1550" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584295411013" />
     <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588960616245" />
-    <state x="905" y="290" key="CommitChangelistDialog2" timestamp="1588798631383">
+    <state x="905" y="290" key="CommitChangelistDialog2" timestamp="1588967255566">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-1655" y="-62" key="CommitChangelistDialog2/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584306954776" />
     <state x="905" y="290" key="CommitChangelistDialog2/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585731934595" />
-    <state x="905" y="290" key="CommitChangelistDialog2/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588798631382" />
-    <state x="987" y="382" key="FileChooserDialogImpl" timestamp="1588776825269">
+    <state x="905" y="290" key="CommitChangelistDialog2/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588967255566" />
+    <state x="987" y="382" key="FileChooserDialogImpl" timestamp="1589376231874">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-1573" y="30" key="FileChooserDialogImpl/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584289500003" />
     <state x="740" y="284" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1440.2520@0.0.1920.1040" timestamp="1583764002891" />
     <state x="987" y="382" key="FileChooserDialogImpl/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585577137545" />
-    <state x="987" y="382" key="FileChooserDialogImpl/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588776825269" />
-    <state width="1258" height="403" key="GridCell.Tab.0.bottom" timestamp="1588966978717">
+    <state x="987" y="382" key="FileChooserDialogImpl/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589376231874" />
+    <state width="1260" height="308" key="GridCell.Tab.0.bottom" timestamp="1589633026243">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1258" height="401" key="GridCell.Tab.0.bottom/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584307380374" />
@@ -340,9 +392,10 @@
     <state width="1259" height="294" key="GridCell.Tab.0.bottom/3640.180.1920.1040/2560.-185.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585863201156" />
     <state width="1259" height="296" key="GridCell.Tab.0.bottom/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585663590529" />
     <state width="938" height="375" key="GridCell.Tab.0.bottom/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@3640.371.1920.1040" timestamp="1585517489442" />
-    <state width="1258" height="403" key="GridCell.Tab.0.bottom/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966978717" />
+    <state width="1260" height="308" key="GridCell.Tab.0.bottom/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589633026243" />
+    <state width="938" height="403" key="GridCell.Tab.0.bottom/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@3640.597.1920.1040" timestamp="1589486062955" />
     <state width="1259" height="202" key="GridCell.Tab.0.bottom/3640.597.1920.1040/2560.-240.1080.1880@3640.597.1920.1040" timestamp="1586615259305" />
-    <state width="1258" height="403" key="GridCell.Tab.0.center" timestamp="1588966978717">
+    <state width="1260" height="308" key="GridCell.Tab.0.center" timestamp="1589633026243">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1258" height="401" key="GridCell.Tab.0.center/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584307380374" />
@@ -350,9 +403,10 @@
     <state width="1259" height="294" key="GridCell.Tab.0.center/3640.180.1920.1040/2560.-185.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585863201156" />
     <state width="1259" height="296" key="GridCell.Tab.0.center/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585663590529" />
     <state width="938" height="375" key="GridCell.Tab.0.center/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@3640.371.1920.1040" timestamp="1585517489442" />
-    <state width="1258" height="403" key="GridCell.Tab.0.center/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966978717" />
+    <state width="1260" height="308" key="GridCell.Tab.0.center/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589633026243" />
+    <state width="938" height="403" key="GridCell.Tab.0.center/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@3640.597.1920.1040" timestamp="1589486062955" />
     <state width="1259" height="202" key="GridCell.Tab.0.center/3640.597.1920.1040/2560.-240.1080.1880@3640.597.1920.1040" timestamp="1586615259305" />
-    <state width="1258" height="403" key="GridCell.Tab.0.left" timestamp="1588966978717">
+    <state width="1260" height="308" key="GridCell.Tab.0.left" timestamp="1589633026243">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1258" height="401" key="GridCell.Tab.0.left/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584307380374" />
@@ -360,9 +414,10 @@
     <state width="1259" height="294" key="GridCell.Tab.0.left/3640.180.1920.1040/2560.-185.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585863201156" />
     <state width="1259" height="296" key="GridCell.Tab.0.left/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585663590528" />
     <state width="938" height="375" key="GridCell.Tab.0.left/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@3640.371.1920.1040" timestamp="1585517489442" />
-    <state width="1258" height="403" key="GridCell.Tab.0.left/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966978717" />
+    <state width="1260" height="308" key="GridCell.Tab.0.left/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589633026243" />
+    <state width="938" height="403" key="GridCell.Tab.0.left/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@3640.597.1920.1040" timestamp="1589486062955" />
     <state width="1259" height="202" key="GridCell.Tab.0.left/3640.597.1920.1040/2560.-240.1080.1880@3640.597.1920.1040" timestamp="1586615259305" />
-    <state width="1258" height="403" key="GridCell.Tab.0.right" timestamp="1588966978717">
+    <state width="1260" height="308" key="GridCell.Tab.0.right" timestamp="1589633026243">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1258" height="401" key="GridCell.Tab.0.right/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584307380374" />
@@ -370,59 +425,68 @@
     <state width="1259" height="294" key="GridCell.Tab.0.right/3640.180.1920.1040/2560.-185.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585863201156" />
     <state width="1259" height="296" key="GridCell.Tab.0.right/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585663590529" />
     <state width="938" height="375" key="GridCell.Tab.0.right/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@3640.371.1920.1040" timestamp="1585517489442" />
-    <state width="1258" height="403" key="GridCell.Tab.0.right/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966978717" />
+    <state width="1260" height="308" key="GridCell.Tab.0.right/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589633026243" />
+    <state width="938" height="403" key="GridCell.Tab.0.right/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@3640.597.1920.1040" timestamp="1589486062955" />
     <state width="1259" height="202" key="GridCell.Tab.0.right/3640.597.1920.1040/2560.-240.1080.1880@3640.597.1920.1040" timestamp="1586615259305" />
-    <state width="1258" height="403" key="GridCell.Tab.1.bottom" timestamp="1588966772619">
+    <state width="1258" height="300" key="GridCell.Tab.1.bottom" timestamp="1589631981085">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.1.bottom/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966772619" />
-    <state width="1258" height="403" key="GridCell.Tab.1.center" timestamp="1588966772619">
+    <state width="1258" height="300" key="GridCell.Tab.1.bottom/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589631981085" />
+    <state width="1258" height="300" key="GridCell.Tab.1.center" timestamp="1589631981085">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.1.center/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966772619" />
-    <state width="1258" height="403" key="GridCell.Tab.1.left" timestamp="1588966772619">
+    <state width="1258" height="300" key="GridCell.Tab.1.center/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589631981085" />
+    <state width="1258" height="300" key="GridCell.Tab.1.left" timestamp="1589631981085">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.1.left/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966772619" />
-    <state width="1258" height="403" key="GridCell.Tab.1.right" timestamp="1588966772619">
+    <state width="1258" height="300" key="GridCell.Tab.1.left/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589631981085" />
+    <state width="1258" height="300" key="GridCell.Tab.1.right" timestamp="1589631981085">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.1.right/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588966772619" />
-    <state x="-1964" y="-144" key="SettingsEditor" timestamp="1584306853762">
-      <screen x="-2560" y="-352" width="2560" height="1400" />
+    <state width="1258" height="300" key="GridCell.Tab.1.right/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589631981085" />
+    <state x="596" y="208" key="SettingsEditor" timestamp="1589450577794">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-1964" y="-144" key="SettingsEditor/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584306853762" />
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/1920.0.1440.2520@0.0.1920.1040" timestamp="1583764186602" />
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/1920.0.2560.1400@0.0.1920.1040" timestamp="1583759092000" />
+    <state x="596" y="208" key="SettingsEditor/3640.597.1920.1040/0.0.2560.1400/2560.-240.1080.1880@0.0.2560.1400" timestamp="1589191670063" />
+    <state x="596" y="208" key="SettingsEditor/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589450577794" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1584303516332">
       <screen x="-2560" y="-352" width="2560" height="1400" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584303516332" />
-    <state x="872" y="433" key="Vcs.Push.Dialog.v2" timestamp="1588798670475">
+    <state x="872" y="433" key="Vcs.Push.Dialog.v2" timestamp="1588967391742">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-1688" y="81" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584306979840" />
     <state x="872" y="433" key="Vcs.Push.Dialog.v2/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585731945983" />
-    <state x="872" y="433" key="Vcs.Push.Dialog.v2/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588798670475" />
-    <state x="873" y="463" key="com.intellij.ide.util.TipDialog" timestamp="1587814435633">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="872" y="433" key="Vcs.Push.Dialog.v2/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1588967391742" />
+    <state x="4295" y="941" key="com.intellij.ide.util.TipDialog" timestamp="1589376090561">
+      <screen x="3640" y="597" width="1920" height="1040" />
     </state>
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584272353574" />
     <state x="873" y="463" key="com.intellij.ide.util.TipDialog/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1585731095542" />
     <state x="4296" y="719" key="com.intellij.ide.util.TipDialog/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@3640.371.1920.1040" timestamp="1585500406975" />
+    <state x="4295" y="941" key="com.intellij.ide.util.TipDialog/3640.597.1920.1040/0.0.2560.1400/2560.-240.1080.1880@3640.597.1920.1040" timestamp="1589191363870" />
     <state x="873" y="463" key="com.intellij.ide.util.TipDialog/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1587814435633" />
+    <state x="4295" y="941" key="com.intellij.ide.util.TipDialog/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@3640.597.1920.1040" timestamp="1589376090561" />
     <state x="-2468" y="-260" width="2376" height="1216" key="dock-window-1" timestamp="1584303380963">
       <screen x="-2560" y="-352" width="2560" height="1400" />
     </state>
     <state x="-2468" y="-260" width="2376" height="1216" key="dock-window-1/0.0.1920.1040/-2560.-352.2560.1400@-2560.-352.2560.1400" timestamp="1584303380963" />
-    <state x="977" y="298" width="606" height="804" key="find.popup" timestamp="1587660131822">
+    <state x="977" y="298" width="606" height="804" key="find.popup" timestamp="1589563721763">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="977" y="298" width="606" height="804" key="find.popup/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1587660131822" />
+    <state x="977" y="298" width="606" height="804" key="find.popup/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589563721763" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1584540904414">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="600" height="424" key="javadoc.popup/3640.371.1920.1040/2560.-186.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1584540904414" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1589573477008">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/3640.597.1920.1040/2560.-240.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1589573477008" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -439,17 +503,21 @@
     <SUITE FILE_PATH="coverage/test_pyqt$draft_2.coverage" NAME="draft_2 Coverage Results" MODIFIED="1587814639024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$pythoncad_qt.coverage" NAME="pythoncad_qt Coverage Results" MODIFIED="1584289120581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$calc_base.coverage" NAME="calc_base Coverage Results" MODIFIED="1588955035262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1589632770384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$geometry.coverage" NAME="geometry Coverage Results" MODIFIED="1588527280048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_tree_view$graphics_view.coverage" NAME="graphics_view Coverage Results" MODIFIED="1587842013740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_tree_view$point.coverage" NAME="point Coverage Results" MODIFIED="1588185840941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$main_test__1_.coverage" NAME="main_test (1) Coverage Results" MODIFIED="1587661975296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$main.coverage" NAME="main Coverage Results" MODIFIED="1585828234469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$diagramscene.coverage" NAME="diagramscene Coverage Results" MODIFIED="1585501160737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$Powder.coverage" NAME="Powder Coverage Results" MODIFIED="1589451902498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$geometry__1_.coverage" NAME="geometry (1) Coverage Results" MODIFIED="1585584050207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$geometry.coverage" NAME="geometry Coverage Results" MODIFIED="1587658846856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$calculation_window.coverage" NAME="calculation_window Coverage Results" MODIFIED="1584471128950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$graphics_view.coverage" NAME="graphics_view Coverage Results" MODIFIED="1586623386388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$asd2.coverage" NAME="asd2 Coverage Results" MODIFIED="1584291559471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$paint.coverage" NAME="paint Coverage Results" MODIFIED="1589632803424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$draft_3.coverage" NAME="draft_3 Coverage Results" MODIFIED="1589554789079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_tree_view$draft_2.coverage" NAME="draft_2 Coverage Results" MODIFIED="1587846135752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_tree_view$main_test__1_.coverage" NAME="main_test (1) Coverage Results" MODIFIED="1588186713243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$asd.coverage" NAME="main_test Coverage Results" MODIFIED="1584305422702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -460,7 +528,7 @@
     <SUITE FILE_PATH="coverage/test_pyqt_tree_view$tree_view.coverage" NAME="tree_view Coverage Results" MODIFIED="1588182080027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$draft_2.coverage" NAME="draft_2 Coverage Results" MODIFIED="1588525553273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$main_calculations_one_velocity.coverage" NAME="main_calculations_one_velocity Coverage Results" MODIFIED="1588861838068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$main_test__1_.coverage" NAME="main_test (1) Coverage Results" MODIFIED="1588966978710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/test_pyqt_final_geometry$main_test__1_.coverage" NAME="main_test (1) Coverage Results" MODIFIED="1589633026236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$draft.coverage" NAME="draft Coverage Results" MODIFIED="1586623134370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/test_pyqt$test_1.coverage" NAME="test_1 Coverage Results" MODIFIED="1584554830544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

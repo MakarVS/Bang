@@ -8,6 +8,9 @@ from Calculations.Pneum.PnAUSMplus import get_f as pn_get_f
 
 
 class PnLayer(object):
+    """
+    Создание временного слоя пространственных узлов для газовой модели (пневматика)
+    """
     def __init__(self, solver, func_in, get_x_v_left, get_x_v_right, get_flux_left, get_flux_right, number=0):
         # Время расчета
         self.time = 0

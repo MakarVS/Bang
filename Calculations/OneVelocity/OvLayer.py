@@ -8,6 +8,9 @@ from Calculations.Invariants.Powder import Powder
 
 
 class OvLayer(object):
+    """
+    Создание временного слоя пространственных узлов для односкоростной модели ГПР
+    """
     def __init__(self, solver, func_in, get_x_v_left, get_x_v_right, get_flux_left, get_flux_right, number=0):
         # Время расчета
         self.time = 0

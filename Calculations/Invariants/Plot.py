@@ -5,6 +5,16 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
 
+def set_axes(x, y, name, name_x, name_y):
+    fig, axes = plt.subplots(nrows=1, ncols=1)
+    axes.plot(x, y, color='red')
+    axes.set_title(name)
+    axes.set_xlabel(name_x)
+    axes.set_ylabel(name_y)
+    axes.grid(True)
+
+    return fig, axes
+
 def plot_one(x, y, name, name_x, name_y):
     """
     Функция построения графиков

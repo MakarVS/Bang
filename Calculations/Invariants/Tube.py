@@ -1,15 +1,12 @@
-"""
-Created on Wed Jan 17 10:53:30 2018
-
-Создание геометрии ствола
-"""
-
-import numpy as np
 from scipy import interpolate
 from math import pi
+import numpy as np
 
 
 class Tube(object):
+    """
+    Создание геометрии ствола
+    """
     def __init__(self, xs, ds):
         self.d = interpolate.interp1d(xs, ds, bounds_error=False, fill_value=(ds[0], ds[-1]))
         dd = np.array(ds, dtype=np.float64)
@@ -18,7 +15,9 @@ class Tube(object):
 
     def get_stuff(self, xs):
         """
-        return (ds)
+        Получение разницы площадей в соседних ячейках
+        :param xs:
+        :return:
         """
         x = np.array(xs, dtype=np.float64)
 

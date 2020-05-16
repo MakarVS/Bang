@@ -35,7 +35,7 @@ class CalculationWindow(QWidget):
 
     def get_tab_widget(self, horizontal):
         """
-        Создание окна с вкладками для построения геометрии
+        Создание окна с вкладками для ввода исходных данных для расчета
         :return:
         """
         self.tabWidget = QTabWidget(horizontal)
@@ -492,30 +492,62 @@ class CalculationWindow(QWidget):
         self.label_lambda_1.setObjectName("label_lambda_1")
         self.label_lambda_1.setText(self._translate("MainWindow",
                                                "<html><head/><body><p><span style=\" font-family:\'Calibri,"
-                                               "sans-serif\'; font-size:11pt;\">λ</span></p></body></html>"))
+                                               "sans-serif\'; font-size:11pt;\">λ</span>"
+                                               "<span style=\" font-family:'Calibri,sans-serif'; font-size:11pt;"
+                                               " vertical-align:sub;\">1</span></p></body></html>"))
         self.gridLayout_coef.addWidget(self.label_lambda_1, 0, 0, 1, 1)
 
-        self.lineEdit_lambda1_1 = QLineEdit(self.params_powder)
-        self.lineEdit_lambda1_1.setObjectName("lineEdit_lambda1_1")
-        self.gridLayout_coef.addWidget(self.lineEdit_lambda1_1, 0, 1, 1, 1)
+        self.lineEdit_lambda_1 = QLineEdit(self.params_powder)
+        self.lineEdit_lambda_1.setObjectName("lineEdit_lambda_1")
+        self.gridLayout_coef.addWidget(self.lineEdit_lambda_1, 0, 1, 1, 1)
 
         self.label_kappa_1 = QLabel(self.params_powder)
         self.label_kappa_1.setObjectName("label_kappa_1")
         self.label_kappa_1.setText(self._translate("MainWindow",
-                                              "<html><head/><body><p><span style=\" font-family:\'Calibri,sans-serif\';"
-                                              " font-size:11pt;\">κ</span></p></body></html>"))
+                                                    "<html><head/><body><p><span style=\" font-family:\'Calibri,"
+                                                    "sans-serif\'; font-size:11pt;\">κ</span>"
+                                                    "<span style=\" font-family:'Calibri,sans-serif'; font-size:11pt;"
+                                                    " vertical-align:sub;\">1</span></p></body></html>"))
         self.gridLayout_coef.addWidget(self.label_kappa_1, 1, 0, 1, 1)
 
         self.lineEdit_kappa_1 = QLineEdit(self.params_powder)
         self.lineEdit_kappa_1.setObjectName("lineEdit_kappa_1")
         self.gridLayout_coef.addWidget(self.lineEdit_kappa_1, 1, 1, 1, 1)
 
+        self.label_lambda_2 = QLabel(self.params_powder)
+        self.label_lambda_2.setObjectName("label_lambda_2")
+        self.label_lambda_2.setText(self._translate("MainWindow",
+                                                    "<html><head/><body><p><span style=\" font-family:\'Calibri,"
+                                                    "sans-serif\'; font-size:11pt;\">λ</span>"
+                                                    "<span style=\" font-family:'Calibri,sans-serif'; font-size:11pt;"
+                                                    " vertical-align:sub;\">2</span></p></body></html>"))
+        self.gridLayout_coef.addWidget(self.label_lambda_2, 0, 2, 1, 1)
+
+        self.lineEdit_lambda_2 = QLineEdit(self.params_powder)
+        self.lineEdit_lambda_2.setObjectName("lineEdit_lambda_2")
+        self.gridLayout_coef.addWidget(self.lineEdit_lambda_2, 0, 3, 1, 1)
+
+        self.label_kappa_2 = QLabel(self.params_powder)
+        self.label_kappa_2.setObjectName("label_kappa_2")
+        self.label_kappa_2.setText(self._translate("MainWindow",
+                                                   "<html><head/><body><p><span style=\" font-family:\'Calibri,"
+                                                   "sans-serif\'; font-size:11pt;\">κ</span>"
+                                                   "<span style=\" font-family:'Calibri,sans-serif'; font-size:11pt;"
+                                                   " vertical-align:sub;\">2</span></p></body></html>"))
+        self.gridLayout_coef.addWidget(self.label_kappa_2, 1, 2, 1, 1)
+
+        self.lineEdit_kappa_2 = QLineEdit(self.params_powder)
+        self.lineEdit_kappa_2.setObjectName("lineEdit_kappa_2")
+        self.gridLayout_coef.addWidget(self.lineEdit_kappa_2, 1, 3, 1, 1)
+
         spacerItem9 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.gridLayout_coef.addItem(spacerItem9, 0, 2, 1, 1)
+        self.gridLayout_coef.addItem(spacerItem9, 0, 4, 1, 1)
 
         self.gridLayout_coef.setColumnStretch(0, 1)
         self.gridLayout_coef.setColumnStretch(1, 2)
-        self.gridLayout_coef.setColumnStretch(2, 10)
+        self.gridLayout_coef.setColumnStretch(2, 1)
+        self.gridLayout_coef.setColumnStretch(3, 2)
+        self.gridLayout_coef.setColumnStretch(4, 7)
 
         self.verticalLayout_coef.addLayout(self.gridLayout_coef)
         self.verticalLayout_charact_powder.addLayout(self.verticalLayout_coef)
@@ -563,7 +595,9 @@ class CalculationWindow(QWidget):
         self.comboBox_gas.setSizePolicy(sizePolicy)
         self.comboBox_gas.setLayoutDirection(Qt.LeftToRight)
         self.comboBox_gas.setObjectName("comboBox_gas")
-        self.comboBox_gas.addItems(['Воздух', 'Углекислый газ', 'Гелий'])
+        gas_list = ['Другой газ']
+        gas_list.extend(list(self.gas_base['name'].unique()))
+        self.comboBox_gas.addItems(gas_list)
         self.comboBox_gas.currentIndexChanged.connect(self.change_type_gas)
         self.gridLayout_base_gas.addWidget(self.comboBox_gas, 0, 1, 1, 1)
 
@@ -625,7 +659,7 @@ class CalculationWindow(QWidget):
 
         self.lineEdit_R_gas = QLineEdit(self.params_gas)
         self.lineEdit_R_gas.setObjectName("lineEdit_R_gas")
-        self.lineEdit_R_gas.setText(str(self.gas_base[self.gas_base['name'] == 'Воздух']['R'].values[0]))
+        # self.lineEdit_R_gas.setText(str(self.gas_base[self.gas_base['name'] == 'Воздух']['R'].values[0]))
         self.gridLayout_char_gas.addWidget(self.lineEdit_R_gas, 0, 1, 1, 1)
 
         self.label_gamma_gas = QLabel(self.params_gas)
@@ -635,7 +669,7 @@ class CalculationWindow(QWidget):
 
         self.lineEdit_gamma_gas = QLineEdit(self.params_gas)
         self.lineEdit_gamma_gas.setObjectName("lineEdit_gamma_gas")
-        self.lineEdit_gamma_gas.setText(str(self.gas_base[self.gas_base['name'] == 'Воздух']['gamma'].values[0]))
+        # self.lineEdit_gamma_gas.setText(str(self.gas_base[self.gas_base['name'] == 'Воздух']['gamma'].values[0]))
         self.gridLayout_char_gas.addWidget(self.lineEdit_gamma_gas, 1, 1, 1, 1)
 
         self.label_covolum_gas = QLabel(self.params_gas)
@@ -645,7 +679,7 @@ class CalculationWindow(QWidget):
 
         self.lineEdit_covolum_gas = QLineEdit(self.params_gas)
         self.lineEdit_covolum_gas.setObjectName("lineEdit_covolum_gas")
-        self.lineEdit_covolum_gas.setText(str(self.gas_base[self.gas_base['name'] == 'Воздух']['covolum'].values[0]))
+        # self.lineEdit_covolum_gas.setText(str(self.gas_base[self.gas_base['name'] == 'Воздух']['covolum'].values[0]))
         self.gridLayout_char_gas.addWidget(self.lineEdit_covolum_gas, 2, 1, 1, 1)
 
         self.verticalLayout_char_gas.addLayout(self.gridLayout_char_gas)
@@ -823,29 +857,51 @@ class CalculationWindow(QWidget):
 
     def change_type_gas(self):
         text = self.comboBox_gas.currentText()
-        self.lineEdit_R_gas.setText(str(self.gas_base[self.gas_base['name'] == text]['R'].values[0]))
-        self.lineEdit_gamma_gas.setText(str(self.gas_base[self.gas_base['name'] == text]['gamma'].values[0]))
-        self.lineEdit_covolum_gas.setText(str(self.gas_base[self.gas_base['name'] == text]['covolum'].values[0]))
+        if text == 'Другой газ':
+            self.lineEdit_R_gas.setText('')
+            self.lineEdit_gamma_gas.setText('')
+            self.lineEdit_covolum_gas.setText('')
+        else:
+            self.lineEdit_R_gas.setText(str(self.gas_base[self.gas_base['name'] == text]['R'].values[0]))
+            self.lineEdit_gamma_gas.setText(str(self.gas_base[self.gas_base['name'] == text]['gamma'].values[0]))
+            self.lineEdit_covolum_gas.setText(str(self.gas_base[self.gas_base['name'] == text]['covolum'].values[0]))
 
     def change_type_powder(self):
         text = self.comboBox_mark.currentText()
-        self.lineEdit_Ik.setText(str(round(self.powder_base[self.powder_base['name']
-                                                            == text]['I_k'].values[0], 4)))
-        self.lineEdit_f.setText(str(round(self.powder_base[self.powder_base['name']
-                                                           == text]['f'].values[0], 4)))
-        self.lineEdit_rho.setText(str(round(self.powder_base[self.powder_base['name']
-                                                             == text]['ro'].values[0], 4)))
-        self.lineEdit_gamma.setText(str(round(self.powder_base[self.powder_base['name']
-                                                               == text]['etta'].values[0] + 1, 4)))
-        self.lineEdit_T_1.setText(str(self.powder_base[self.powder_base['name'] == text]['T_1'].values[0]))
-        self.lineEdit_covolum.setText(str(round(self.powder_base[self.powder_base['name']
-                                                                 == text]['alpha_k'].values[0], 4)))
-        self.lineEdit_zk.setText(str(round(self.powder_base[self.powder_base['name']
-                                                            == text]['Z_k'].values[0], 4)))
-        self.lineEdit_lambda1_1.setText(str(round(self.powder_base[self.powder_base['name']
-                                                                   == text]['lambda_1'].values[0], 4)))
-        self.lineEdit_kappa_1.setText(str(round(self.powder_base[self.powder_base['name']
-                                                                 == text]['k_1'].values[0], 4)))
+        if text == 'Другой порох':
+            self.lineEdit_Ik.setText('')
+            self.lineEdit_f.setText('')
+            self.lineEdit_rho.setText('')
+            self.lineEdit_gamma.setText('')
+            self.lineEdit_T_1.setText('')
+            self.lineEdit_covolum.setText('')
+            self.lineEdit_zk.setText('')
+            self.lineEdit_lambda_1.setText('')
+            self.lineEdit_kappa_1.setText('')
+            self.lineEdit_lambda_2.setText('')
+            self.lineEdit_kappa_2.setText('')
+        else:
+            self.lineEdit_Ik.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                == text]['I_k'].values[0], 4)))
+            self.lineEdit_f.setText(str(round(self.powder_base[self.powder_base['name']
+                                                               == text]['f'].values[0], 4)))
+            self.lineEdit_rho.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                 == text]['ro'].values[0], 4)))
+            self.lineEdit_gamma.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                   == text]['etta'].values[0] + 1, 4)))
+            self.lineEdit_T_1.setText(str(self.powder_base[self.powder_base['name'] == text]['T_1'].values[0]))
+            self.lineEdit_covolum.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                     == text]['alpha_k'].values[0], 4)))
+            self.lineEdit_zk.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                == text]['Z_k'].values[0], 4)))
+            self.lineEdit_lambda_1.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                       == text]['lambda_1'].values[0], 4)))
+            self.lineEdit_kappa_1.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                     == text]['k_1'].values[0], 4)))
+            self.lineEdit_lambda_2.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                      == text]['lambda_2'].values[0], 4)))
+            self.lineEdit_kappa_2.setText(str(round(self.powder_base[self.powder_base['name']
+                                                                     == text]['k_2'].values[0], 4)))
 
     def change_type_materials(self):
         text = self.comboBox_materials.currentText()
@@ -978,17 +1034,20 @@ class CalculationWindow(QWidget):
                 I_k = self.lineEdit_Ik.text()
                 Z_k = self.lineEdit_zk.text()
                 alpha_k = self.lineEdit_covolum.text()
-                etta = self.lineEdit_gamma.text()
+                gamma = self.lineEdit_gamma.text()
                 f = self.lineEdit_f.text()
                 k_1 = self.lineEdit_kappa_1.text()
-                lambda_1 = self.lineEdit_lambda1_1.text()
+                lambda_1 = self.lineEdit_lambda_1.text()
+                k_2 = self.lineEdit_kappa_2.text()
+                lambda_2 = self.lineEdit_lambda_2.text()
                 ro = self.lineEdit_rho.text()
                 T_1 = self.lineEdit_T_1.text()
 
                 omega = self.lineEdit_omega.text()
                 p_f = self.lineEdit_pf.text()
 
-                if I_k and Z_k and alpha_k and etta and f and k_1 and lambda_1 and ro and T_1 and omega and p_f:
+                if I_k and Z_k and alpha_k and gamma and f and k_1 and lambda_1 and k_2 and lambda_2\
+                       and ro and T_1 and omega and p_f:
                     omega = float(omega.replace(',', '.'))
                     omega_dimension = self.comboBox_q.currentText()
                     omega = omega if omega_dimension == 'Килограммы' else (omega / 1000)
@@ -997,20 +1056,20 @@ class CalculationWindow(QWidget):
                     p_f_dimension = self.comboBox_pf.currentText()
                     p_f = p_f if p_f_dimension == 'Па' else (p_f * 1_000_000)
 
-                    powder = dict(gamma=float(etta.replace(',', '.')) + 1,
-                                  nu=1,
+                    powder = dict(gamma=float(gamma.replace(',', '.')),
+                                  nu=0.9,
                                   param_powder={'I_k': float(I_k.replace(',', '.')),
                                                 'Z_k': float(Z_k.replace(',', '.')),
                                                 'alpha_k': float(alpha_k.replace(',', '.')),
-                                                'etta': float(etta.replace(',', '.')) - 1,
+                                                'etta': float(gamma.replace(',', '.')) - 1,
                                                 'T_1': float(T_1.replace(',', '.')),
                                                 'f': float(f.replace(',', '.')),
                                                 'k_1': float(k_1.replace(',', '.')),
-                                                'k_2': None,
+                                                'k_2': float(k_2.replace(',', '.')),
                                                 'k_f': None,
                                                 'k_l': None,
                                                 'lambda_1': float(lambda_1.replace(',', '.')),
-                                                'lambda_2': None,
+                                                'lambda_2': float(lambda_2.replace(',', '.')),
                                                 'name': self.comboBox_mark.currentText(),
                                                 'ro': float(ro.replace(',', '.'))})
                     solver = calculations_one_velocity.solver(q=q,
@@ -1025,24 +1084,25 @@ class CalculationWindow(QWidget):
                                                               R=R_out,
                                                               r=r_in)
                     self.main_window.change_statusbar('Идет рассчёт')
-                    T_in = calculations_one_velocity.calc_run(solver)
+                    self.results, T_in, flag_thermo = calculations_one_velocity.calc_run(solver)
                     self.main_window.change_statusbar('Рассчёт окончен')
 
-                    solver_heat = calculations_thermo.solver_thermo(ro=rho_materials,
-                                                                    cp=cp_materials,
-                                                                    lambd=lambda_materials,
-                                                                    n_x=n_cells,
-                                                                    n_r=n_cells_r,
-                                                                    L=L,
-                                                                    R=R_out,
-                                                                    r=r_in,
-                                                                    t_end=t_end,
-                                                                    T_env=T_env,
-                                                                    T_in=T_in)
+                    if flag_thermo:
+                        solver_heat = calculations_thermo.solver_thermo(ro=rho_materials,
+                                                                        cp=cp_materials,
+                                                                        lambd=lambda_materials,
+                                                                        n_x=n_cells,
+                                                                        n_r=n_cells_r,
+                                                                        L=L,
+                                                                        R=R_out,
+                                                                        r=r_in,
+                                                                        t_end=t_end,
+                                                                        T_env=T_env,
+                                                                        T_in=T_in)
 
-                    self.main_window.change_statusbar('Идет рассчёт')
-                    calculations_thermo.calc_run(solver_heat)
-                    self.main_window.change_statusbar('Рассчёт окончен')
+                        self.main_window.change_statusbar('Идет рассчёт')
+                        calculations_thermo.calc_run(solver_heat)
+                        self.main_window.change_statusbar('Рассчёт окончен')
                 else:
                     self.main_window.change_statusbar('НЕ ВСЕ ПОЛЯ ЗАПОЛНЕНЫ!!!')
             elif text == 'Газ':
@@ -1078,26 +1138,30 @@ class CalculationWindow(QWidget):
 
                     # print(solver)
                     self.main_window.change_statusbar('Идет рассчёт')
-                    T_in = calculations_pneum.calc_run(solver) - 273.15
+                    self.results, T_in, flag_thermo = calculations_pneum.calc_run(solver)
+                    T_in -= 273.15
                     self.main_window.change_statusbar('Рассчёт окончен')
 
-                    solver_heat = calculations_thermo.solver_thermo(ro=rho_materials,
-                                                                    cp=cp_materials,
-                                                                    lambd=lambda_materials,
-                                                                    n_x=n_cells,
-                                                                    n_r=n_cells_r,
-                                                                    L=L,
-                                                                    R=R_out,
-                                                                    r=r_in,
-                                                                    t_end=t_end,
-                                                                    T_env=T_env,
-                                                                    T_in=T_in)
+                    if flag_thermo:
+                        solver_heat = calculations_thermo.solver_thermo(ro=rho_materials,
+                                                                        cp=cp_materials,
+                                                                        lambd=lambda_materials,
+                                                                        n_x=n_cells,
+                                                                        n_r=n_cells_r,
+                                                                        L=L,
+                                                                        R=R_out,
+                                                                        r=r_in,
+                                                                        t_end=t_end,
+                                                                        T_env=T_env,
+                                                                        T_in=T_in)
 
-                    self.main_window.change_statusbar('Идет рассчёт')
-                    calculations_thermo.calc_run(solver_heat)
-                    self.main_window.change_statusbar('Рассчёт окончен')
+                        self.main_window.change_statusbar('Идет рассчёт')
+                        calculations_thermo.calc_run(solver_heat)
+                        self.main_window.change_statusbar('Рассчёт окончен')
 
                 else:
                     self.main_window.change_statusbar('НЕ ВСЕ ПОЛЯ ЗАПОЛНЕНЫ!!!')
         else:
             self.main_window.change_statusbar('НЕ ВСЕ ПОЛЯ ЗАПОЛНЕНЫ!!!')
+
+        self.main_window.action_postprocessing.setEnabled(True)

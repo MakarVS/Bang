@@ -1,4 +1,7 @@
 class ThermoLayer(object):
+    """
+    Класс для рассчета теплопередачи по стенкам ствола
+    """
     def __init__(self, init_dict):
         self.init_dict = init_dict
         # Шаг по времени

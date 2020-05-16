@@ -1,5 +1,4 @@
 from Calculations.Pneum.PnLayer import PnLayer
-
 from Calculations.Pneum.PnBorder import *
 
 
@@ -10,11 +9,8 @@ def func_in(x, grid):
     :return: значения параметров плотности, скорости и давления в ячейке
     """
     if x:
-        # ro = grid['init_const']['p'] / (grid['consts']['R'] * grid['init_const']['T'] +
-        #                                 grid['init_const']['p'] * grid['consts']['covolume'])
-        ro = grid['init_const']['p'] / (grid['consts']['R'] * grid['init_const']['T'])
-        # ro = grid['init_const']['ro']
-        # ro = 250
+        ro = grid['init_const']['p'] / (grid['consts']['R'] * grid['init_const']['T'] +
+                                        grid['init_const']['p'] * grid['consts']['covolume'])
         u = 0
         p = grid['init_const']['p']
         return ro, u, p

@@ -8,6 +8,7 @@ from Interface.Graphics.graphics_view import GraphicsView
 from Interface.Tree.tree_view import TreeView
 from Interface.Tree.tree_model import TreeModel
 from Interface.Calculation.calc_base import CalculationWindow
+from Interface.Postprocessing.postproc_base import  PostprocessingWindow
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -28,6 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.visible_geom = None
         self.visible_calc = None
+        self.visible_post = None
         self.statusbar = None
 
         self.create_actions_menubar()
@@ -56,6 +58,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.toolBar.addAction(self.action_geometry)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.action_calculation)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.action_postprocessing)
 
         self.addToolBar(QtCore.Qt.LeftToolBarArea, self.toolBar)
 
@@ -93,22 +97,39 @@ class MainWindow(QtWidgets.QMainWindow):
                                                     triggered=self.create_calculation_interface)
         self.action_calculation.setEnabled(False)
         self.action_calculation.setCheckable(True)
-        self.action_calculation.setIcon(icon('./icon/shoot.png'))
+        self.action_calculation.setIcon(icon('./icon/shoot_2.png'))
         self.action_calculation.setShortcut('Ctrl+C')
         self.action_calculation.setIconText('Расчет Ctrl+C')
+
+        self.action_postprocessing = QtWidgets.QAction(self.centralwidget,
+                                                       triggered=self.create_postprocessing_interface)
+        self.action_postprocessing.setEnabled(False)
+        self.action_postprocessing.setCheckable(True)
+        self.action_postprocessing.setIcon(icon('./icon/plot.png'))
+        self.action_postprocessing.setShortcut('Ctrl+P')
+        self.action_postprocessing.setIconText('Постобработка Ctrl+P')
 
     def create_new_calc(self):
             # self.message.save()
         self.action_geometry.setEnabled(True)
         self.action_calculation.setEnabled(False)
+        self.action_postprocessing.setEnabled(False)
         self.change_statusbar('Новый расчёт')
 
     def create_geometry_interface(self):
         if self.visible_geom:
             self.geometry.tabWidget.show()
+            self.graphics.show()
             self.calculation.tabWidget.hide()
+            self.postprocessing.tabWidget.hide()
+            self.postprocessing.plot.hide()
+
             self.action_calculation.setEnabled(True)
             self.action_calculation.setChecked(False)
+
+            if self.visible_post:
+                self.action_postprocessing.setEnabled(True)
+                self.action_postprocessing.setChecked(False)
         else:
             self.tree_view = TreeView()
             self.tree_model = TreeModel(self.tree_view)
@@ -127,17 +148,23 @@ class MainWindow(QtWidgets.QMainWindow):
             self.geometry = GeometryWindow(self, self.centralwidget, self.tree_view, self.graphics)
             self.tree_model.insertRows([['Геометрия', self.geometry], ['Построение геометрии ствола']])
             self.calculation = CalculationWindow(self, self.centralwidget, self.tree_view, self.graphics)
+            self.postprocessing = PostprocessingWindow(self.centralwidget, self.calculation)
 
             self.horizontalLayout.addWidget(self.geometry.tabWidget)
             self.horizontalLayout.addWidget(self.calculation.tabWidget)
+            self.horizontalLayout.addWidget(self.postprocessing.tabWidget)
             self.calculation.tabWidget.hide()
+            self.postprocessing.tabWidget.hide()
             self.horizontalLayout.addWidget(self.tree_view)
             self.horizontalLayout.setStretch(0, 2)
             self.horizontalLayout.setStretch(1, 2)
-            self.horizontalLayout.setStretch(2, 1)
+            self.horizontalLayout.setStretch(2, 2)
+            self.horizontalLayout.setStretch(3, 1)
 
             self.grid_central.addLayout(self.horizontalLayout, 1, 0, 1, 1)
             self.grid_central.addWidget(self.graphics, 0, 0, 1, 1)
+            self.grid_central.addWidget(self.postprocessing.plot, 0, 0, 1, 1)
+            self.postprocessing.plot.hide()
 
             self.grid_central.setRowStretch(0, 1)
             self.grid_central.setRowStretch(1, 1)
@@ -151,7 +178,14 @@ class MainWindow(QtWidgets.QMainWindow):
     def create_calculation_interface(self):
         if self.visible_calc:
             self.geometry.tabWidget.hide()
+            self.postprocessing.tabWidget.hide()
+            self.postprocessing.plot.hide()
+            self.graphics.show()
             self.calculation.tabWidget.show()
+
+            if self.visible_post:
+                self.action_postprocessing.setEnabled(True)
+                self.action_postprocessing.setChecked(False)
         else:
             self.tree_model.insertRows([['Расчет', self.calculation], ['Задание параметров расчета']])
 
@@ -164,6 +198,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.action_calculation.setEnabled(False)
         self.action_geometry.setEnabled(True)
         self.action_geometry.setChecked(False)
+
+    def create_postprocessing_interface(self):
+        if self.visible_post:
+            self.geometry.tabWidget.hide()
+            self.graphics.hide()
+            self.calculation.tabWidget.hide()
+            self.postprocessing.tabWidget.show()
+            self.postprocessing.plot.show()
+        else:
+            self.postprocessing.init_plot()
+            self.tree_model.insertRows([['Постпроцессинг', self.postprocessing], ['Результаты рассчета']])
+
+            self.graphics.hide()
+            self.calculation.tabWidget.hide()
+            self.geometry.tabWidget.hide()
+            self.postprocessing.tabWidget.show()
+            self.postprocessing.plot.show()
+
+            self.visible_post = True
+
+        self.change_statusbar('Постпроцессинг')
+        self.action_calculation.setEnabled(True)
+        self.action_geometry.setEnabled(True)
+        self.action_geometry.setChecked(False)
+        self.action_calculation.setChecked(False)
+        self.action_postprocessing.setEnabled(False)
 
     def close_calc(self):
         if self.calculation or self.geometry:

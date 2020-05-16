@@ -6,21 +6,6 @@ class Powder(object):
     Описание пороха
     """
     def __init__(self, param_powder):
-        # self.I_k, \
-        # # self.T_1, \
-        # self.z_k, \
-        # self.alpha_k, \
-        # self.etta, \
-        # self.f, \
-        # self.k_1, \
-        # self.k_2, \
-        # self.k_f, \
-        # self.k_l, \
-        # self.lambda_1, \
-        # self.lambda_2, \
-        # self.name, \
-        # self.ro = param_powder.values()
-
         self.I_k = param_powder['I_k']
         self.z_k = param_powder['Z_k']
         self.alpha_k = param_powder['alpha_k']
@@ -49,15 +34,15 @@ class Powder(object):
         """
         cond1 = z < 0
         cond2 = np.logical_and(z >= 0, z < 1)
-        # cond3 = np.logical_and(1 <= z, z < self.z_k)
-        # cond4 = z >= self.z_k
-        cond4 = z >= 1
+        cond3 = np.logical_and(1 <= z, z < self.z_k)
+        cond4 = z >= self.z_k
+        # cond4 = z >= 1
 
         psi = np.zeros_like(z)
 
         psi[cond1] = 0
         psi[cond2] = self.k_1 * z[cond2] * (1 + self.lambda_1 * z[cond2])
-        # psi[cond3] = self.k_1 * (1 + self.lambda_1) + self.k_2 * (z[cond3] - 1) * (1 + self.lambda_2 * (z[cond3] - 1))
+        psi[cond3] = self.k_1 * (1 + self.lambda_1) + self.k_2 * (z[cond3] - 1) * (1 + self.lambda_2 * (z[cond3] - 1))
         psi[cond4] = 1
 
         return psi
@@ -70,15 +55,15 @@ class Powder(object):
         """
         cond1 = z < 0
         cond2 = np.logical_and(z >= 0, z < 1)
-        # cond3 = np.logical_and(1 <= z, z < self.z_k)
-        # cond4 = z >= self.z_k
-        cond4 = z >= 1
+        cond3 = np.logical_and(1 <= z, z < self.z_k)
+        cond4 = z >= self.z_k
+        # cond4 = z >= 1
 
         dpsi = np.zeros_like(z)
 
         dpsi[cond1] = 0
         dpsi[cond2] = self.k_1 * (1 + 2 * self.lambda_1 * z[cond2])
-        # dpsi[cond3] = self.k_2 * (1 + 2 * self.lambda_2 * (z[cond3] - 1))
+        dpsi[cond3] = self.k_2 * (1 + 2 * self.lambda_2 * (z[cond3] - 1))
         dpsi[cond4] = 0
 
         return dpsi
